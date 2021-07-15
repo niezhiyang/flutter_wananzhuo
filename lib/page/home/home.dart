@@ -3,6 +3,7 @@ import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_wananzhuo/model/banner_entity.dart';
 import 'package:flutter_wananzhuo/net/Repository/home_repository.dart';
 import 'package:flutter_wananzhuo/model/home_response_entity.dart';
+import 'package:flutter_wananzhuo/net/Repository/user_repository.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
 import 'package:provider/provider.dart';
 
@@ -183,6 +184,11 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         onPressed: () {
+          UserRepository userRepository = UserRepository();
+          userRepository.login().then((value) => {
+
+          });
+
           String color = "black";
           switch (i) {
             case 0:
@@ -195,17 +201,9 @@ class _HomePageState extends State<HomePage> {
               color = "deepOrange";
               break;
           }
-
-          HomeRepository repository = HomeRepository();
-          var a = repository.getHome(1);
-          a.then((value) {
-            Toast.show(value.data?.datas?[0].chapterName);
-            setState(() {
-              home = value;
-            });
-          });
-
           context.read<ThemeState>().changeThemeData(color);
+
+
         },
       );
       if(i==0){

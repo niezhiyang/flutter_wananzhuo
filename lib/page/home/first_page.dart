@@ -24,7 +24,7 @@ class FirstPagePageState extends State<FirstPage> {
   HomeResponseEntity? _homeResponse = HomeResponseEntity();
   List<BannerData> _banners = [];
   List<String> _bannerUrl = [];
-  List<HomeResponseDataDatas> _homeDataResponse = [];
+  List<HomeResponseDataDatas> _articleList = [];
   bool _isFirstLoad = true;
   late EasyRefreshController _controller;
 
@@ -41,6 +41,8 @@ class FirstPagePageState extends State<FirstPage> {
   @override
   void dispose() {
     super.dispose();
+    _controller.dispose();
+    _scrollController.dispose();
   }
 
   @override
@@ -81,12 +83,12 @@ class FirstPagePageState extends State<FirstPage> {
                   if (index == 0) {
                     return _headerItem();
                   }
-                  return _articleItem(_homeDataResponse[index - 1]);
+                  return _articleItem(_articleList[index - 1], index - 1);
                 },
                 separatorBuilder: (BuildContext context, int index) {
                   return const Divider(height: 1, color: Colors.black12);
                 },
-                itemCount: _homeDataResponse.length + 1),
+                itemCount: _articleList.length + 1),
           )
         ],
       ),
@@ -103,8 +105,8 @@ class FirstPagePageState extends State<FirstPage> {
             _homeResponse?.data?.datas;
 
         if (homeDataResponse != null && homeDataResponse.isNotEmpty) {
-          _homeDataResponse.clear();
-          _homeDataResponse.addAll(homeDataResponse);
+          _articleList.clear();
+          _articleList.addAll(homeDataResponse);
         }
         _banners.clear();
         _bannerUrl.clear();
@@ -133,7 +135,7 @@ class FirstPagePageState extends State<FirstPage> {
     return Image.network(_banners[0].imagePath!);
   }
 
-  Widget _articleItem(HomeResponseDataDatas homeItem) {
+  Widget _articleItem(HomeResponseDataDatas homeItem, int index) {
     String? chapter = homeItem.superChapterName;
     if (homeItem.chapterName != null) {
       chapter = "$chapter/${homeItem.chapterName}";
@@ -142,7 +144,24 @@ class FirstPagePageState extends State<FirstPage> {
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Row(
         children: [
-          Icon(homeItem.collect! ? Icons.favorite : Icons.favorite_border),
+          IconButton(
+              onPressed: () {
+                if (homeItem.collect!) {
+                  _repository.cancelArticle(homeItem.id).then((value) {
+                    setState(() {
+                      _articleList[index].collect = false;
+                    });
+                  });
+                } else {
+                  _repository.saveArticle(homeItem.id).then((value) {
+                    setState(() {
+                      _articleList[index].collect = true;
+                    });
+                  });
+                }
+              },
+              icon: Icon(
+                  homeItem.collect! ? Icons.favorite : Icons.favorite_border)),
           const SizedBox(
             width: 10,
           ),
@@ -160,8 +179,8 @@ class FirstPagePageState extends State<FirstPage> {
                               TextStyle(fontSize: 13, color: Colors.black45)),
                       TextSpan(
                           text: homeItem.shareUser ?? "",
-                          style:
-                              const TextStyle(fontSize: 14, color: Colors.black87)),
+                          style: const TextStyle(
+                              fontSize: 14, color: Colors.black87)),
                     ]),
                   ),
                   const SizedBox(
@@ -198,12 +217,11 @@ class FirstPagePageState extends State<FirstPage> {
                 text: TextSpan(children: [
                   const TextSpan(
                       text: "时间：",
-                      style:
-                      TextStyle(fontSize: 13, color: Colors.black45)),
+                      style: TextStyle(fontSize: 13, color: Colors.black45)),
                   TextSpan(
                       text: homeItem.niceDate ?? "",
                       style:
-                      const TextStyle(fontSize: 14, color: Colors.black87)),
+                          const TextStyle(fontSize: 14, color: Colors.black87)),
                 ]),
               ),
             ],
@@ -235,7 +253,7 @@ class FirstPagePageState extends State<FirstPage> {
     home.then((value) {
       if (mounted) {
         setState(() {
-          _homeDataResponse.addAll(value.data!.datas!);
+          _articleList.addAll(value.data!.datas!);
         });
       }
       _controller.finishLoad(

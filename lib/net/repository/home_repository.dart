@@ -28,4 +28,24 @@ class HomeRepository {
   }
 
 
+
+  /// 收藏
+  Future<BannerEntity> saveArticle(int? articId) async {
+    Response response = await NetHelper.getDio().post<String>(
+      "/lg/collect/$articId/json",
+    );
+    Map<String, dynamic> userMap = json.decode(response.data);
+    BannerEntity banner = BannerEntity().fromJson(userMap);
+    return banner;
+  }
+
+  /// 取消收藏
+  Future<BannerEntity> cancelArticle(int? articId) async {
+    Response response = await NetHelper.getDio().post<String>(
+      "/lg/collect/$articId/json",
+    );
+    Map<String, dynamic> userMap = json.decode(response.data);
+    BannerEntity banner = BannerEntity().fromJson(userMap);
+    return banner;
+  }
 }

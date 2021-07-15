@@ -22,6 +22,7 @@ dependencies:
   # 管理dio的cookie
   cookie_jar: ^3.0.1
 
+
   # Flutter中的webview
   flutter_webview_plugin: ^0.4.0
 
@@ -49,6 +50,9 @@ dependencies:
   flutter_easylogger: ^2.0.1
 
   cupertino_icons: ^1.0.2
+
+ # 文件目录
+  path_provider: ^2.0.2
 
 dev_dependencies:
   flutter_test:
