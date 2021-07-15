@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'page/home.dart';
+import 'page/home/home.dart';
 import 'page/splash.dart';
 
 class RouterInit {

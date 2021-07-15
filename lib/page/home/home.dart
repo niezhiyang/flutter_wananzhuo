@@ -1,13 +1,13 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_easylogger/flutter_logger.dart';
+import 'package:flutter_wananzhuo/model/banner_entity.dart';
 import 'package:flutter_wananzhuo/net/Repository/home_repository.dart';
-import 'package:flutter_wananzhuo/net/Repository/home_response_entity.dart';
+import 'package:flutter_wananzhuo/model/home_response_entity.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
 import 'package:provider/provider.dart';
 
-import '../setting.dart';
+import '../../setting.dart';
+import 'first_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -39,6 +39,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: _currentIndex);
+
+
   }
 
   @override
@@ -57,13 +59,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Toast.init(context);
-    // return Provider<ThemeState>(
-    //     create: (_) => ThemeState(1, ThemeData.dark()),
-    //     // we use `builder` to obtain a new `BuildContext` that has access to the provider
-    //     builder: (context, widget) {
-    //       return _getHome(context.read<ThemeState>());
-    //     });
-    // return _getHome(context.watch<ThemeState>());
     return _getHome();
   }
 
@@ -170,9 +165,10 @@ class _HomePageState extends State<HomePage> {
     }
     return array;
   }
-  HomeResponseEntity? home;
-  List<Widget> _buildPageChild() {
 
+  HomeResponseEntity? home;
+
+  List<Widget> _buildPageChild() {
     var array = <Widget>[];
     for (int i = 0; i < tabTitle.length; i++) {
       TextButton item = TextButton(
@@ -207,26 +203,20 @@ class _HomePageState extends State<HomePage> {
             setState(() {
               home = value;
             });
-
-
           });
-
-
-          // print(document.toString());
-          // print("------------------------------------");
-          // print(document.toXmlString(pretty: true, indent: '\t'));
-
-          // Logger.v("你好呀");
-          // Logger.i("你好呀");
-          // Logger.d("你好呀");
-          // Logger.w("你好呀");
-          Logger.e("bookshelfXml2");
 
           context.read<ThemeState>().changeThemeData(color);
         },
       );
-      array.add(item);
+      if(i==0){
+        array.add(FirstPage());
+      }else{
+        array.add(item);
+      }
+
     }
     return array;
   }
+
+
 }
