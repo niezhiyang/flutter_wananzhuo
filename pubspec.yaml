@@ -16,19 +16,18 @@ dependencies:
   #  fluttertoast: ^8.0.7
   # 状态管理
   provider: ^5.0.0
-
   # 网络
   dio: ^4.0.0
   # 管理dio的cookie
   cookie_jar: ^3.0.1
-
+#  dio_cookie_manager: ^2.0.0
 
   # Flutter中的webview
   flutter_webview_plugin: ^0.4.0
 
   # 上拉下拉空状态的ListView
 
-  flutter_easyrefresh: 2.2.1
+  flutter_easyrefresh: ^2.2.1
   # sp
   shared_preferences: ^2.0.6
   #  # 其中包括了SpUtil、ScreenUtil、TimelineUtil

@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_easylogger/flutter_logger.dart';
 
 import 'interceptor/cookie_interceptor.dart';
+import 'interceptor/cookie_mgr.dart';
 import 'interceptor/log_interceptor.dart';
 
 class NetHelper {
@@ -18,7 +18,7 @@ class NetHelper {
 
   NetHelper._() {
     dio = Dio();
-    var cookieJar = PersistCookieJar();
+    var cookieJar = CookieJar();
     dio.interceptors.add(CustomInterceptors());
     dio.interceptors.add(CookieManager(cookieJar));
     dio.options.baseUrl = BASE_URL;
