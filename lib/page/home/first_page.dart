@@ -40,6 +40,8 @@ class FirstPagePageState extends State<FirstPage> {
     _scrollController = ScrollController();
     _getNetData();
     // NetHelper
+
+    Logger.e("FirstPagePageState");
   }
 
   @override

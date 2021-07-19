@@ -59,11 +59,9 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     Toast.init(context);
     return Scaffold(
         appBar: AppBar(title: const Text("Github")),
-        drawer: _drawer(),
         bottomNavigationBar: _bottomNavigationBar(),
         body: PageView(
           controller: _pageController,
@@ -94,56 +92,6 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
     );
   }
 
-  Drawer _drawer() {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.lightBlueAccent,
-            ),
-            child: Center(
-              child: SizedBox(
-                width: 60.0,
-                height: 60.0,
-                child: CircleAvatar(
-                  child: Text('头像'),
-                ),
-              ),
-            ),
-          ),
-          ListTile(
-            title: const Text('Item 1'),
-            leading: const CircleAvatar(
-              child: Icon(Icons.school),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: const Text('Item 2'),
-            leading: const CircleAvatar(
-              child: Text('B2'),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: const Text('Item 3'),
-            leading: const CircleAvatar(
-              child: Icon(Icons.list),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-        ],
-      ),
-    );
-  }
 
   List<BottomNavigationBarItem> _buildItem() {
     var array = <BottomNavigationBarItem>[];
