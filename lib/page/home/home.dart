@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
   void _onItemTapped(int postion) {
     if (mounted) {
       setState(() {
@@ -53,35 +53,26 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   final tabTitle = ["首页", "发现", "我的"];
-  final tabIcon = [Icons.home, Icons.search, Icons.image];
+  final tabIcon = [Icons.home, Icons.search, Icons.person];
 
   late PageController _pageController;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     Toast.init(context);
-    return _getHome();
+    return Scaffold(
+        appBar: AppBar(title: const Text("Github")),
+        drawer: _drawer(),
+        bottomNavigationBar: _bottomNavigationBar(),
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: _pageChaged,
+          children: _buildPageChild(),
+        ));
   }
 
-  Widget _getHome() {
-    return MaterialApp(
-      theme: ThemeData(
-        primaryColor:
-            ThemeConstans.themeColorMap[context.watch<ThemeState>().color],
-        primaryColorLight:
-            ThemeConstans.themeColorMap[context.watch<ThemeState>().color],
-      ),
-      home: Scaffold(
-          appBar: AppBar(title: const Text("Github")),
-          drawer: _drawer(),
-          bottomNavigationBar: _bottomNavigationBar(),
-          body: PageView(
-            controller: _pageController,
-            onPageChanged: _pageChaged,
-            children: _buildPageChild(),
-          )),
-    );
-  }
+
 
   BottomNavigationBar _bottomNavigationBar() {
     return BottomNavigationBar(
@@ -215,6 +206,9 @@ class _HomePageState extends State<HomePage> {
     }
     return array;
   }
+
+  @override
+  bool get wantKeepAlive => true;
 
 
 }

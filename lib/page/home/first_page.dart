@@ -7,7 +7,10 @@ import 'package:flutter_wananzhuo/constans/easy_listview.dart';
 import 'package:flutter_wananzhuo/model/banner_entity.dart';
 import 'package:flutter_wananzhuo/model/home_response_entity.dart';
 import 'package:flutter_wananzhuo/net/Repository/home_repository.dart';
+import 'package:flutter_wananzhuo/page/article_details.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
+
+import '../../router.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -22,9 +25,9 @@ class FirstPagePageState extends State<FirstPage> {
   int index = 0;
   final HomeRepository _repository = HomeRepository();
   HomeResponseEntity? _homeResponse = HomeResponseEntity();
-  List<BannerData> _banners = [];
-  List<String> _bannerUrl = [];
-  List<HomeResponseDataDatas> _articleList = [];
+  final List<BannerData> _banners = [];
+  final List<String> _bannerUrl = [];
+  final List<HomeResponseDataDatas> _articleList = [];
   bool _isFirstLoad = true;
   late EasyRefreshController _controller;
 
@@ -36,6 +39,7 @@ class FirstPagePageState extends State<FirstPage> {
     _controller = EasyRefreshController();
     _scrollController = ScrollController();
     _getNetData();
+    // NetHelper
   }
 
   @override
@@ -140,93 +144,103 @@ class FirstPagePageState extends State<FirstPage> {
     if (homeItem.chapterName != null) {
       chapter = "$chapter/${homeItem.chapterName}";
     }
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      child: Row(
-        children: [
-          IconButton(
-              onPressed: () {
-                if (homeItem.collect!) {
-                  _repository.cancelArticle(homeItem.id).then((value) {
-                    setState(() {
-                      _articleList[index].collect = false;
+    return GestureDetector(
+      onTap: () {
+
+        ArticleDetailPage.push(context, homeItem);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        child: Row(
+          children: [
+            IconButton(
+                onPressed: () {
+                  if (homeItem.collect!) {
+                    _repository.cancelArticle(homeItem.id).then((value) {
+                      Toast.show("取消成功");
+                      setState(() {
+                        _articleList[index].collect = false;
+                      });
                     });
-                  });
-                } else {
-                  _repository.saveArticle(homeItem.id).then((value) {
-                    setState(() {
-                      _articleList[index].collect = true;
+                  } else {
+                    _repository.saveArticle(homeItem.id).then((value) {
+                      Toast.show("收藏成功");
+                      setState(() {
+                        _articleList[index].collect = true;
+                      });
                     });
-                  });
-                }
-              },
-              icon: Icon(
-                  homeItem.collect! ? Icons.favorite : Icons.favorite_border)),
-          const SizedBox(
-            width: 10,
-          ),
-          Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  RichText(
-                    text: TextSpan(children: [
-                      const TextSpan(
-                          text: "作者：",
-                          style:
-                              TextStyle(fontSize: 13, color: Colors.black45)),
-                      TextSpan(
-                          text: homeItem.shareUser ?? "",
-                          style: const TextStyle(
-                              fontSize: 14, color: Colors.black87)),
-                    ]),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  RichText(
-                    text: TextSpan(children: [
-                      const TextSpan(
-                          text: "分类：",
-                          style:
-                              TextStyle(fontSize: 13, color: Colors.black45)),
-                      TextSpan(
-                          text: chapter,
-                          style: const TextStyle(
-                              fontSize: 14, color: Colors.black87)),
-                    ]),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                homeItem.title ?? "",
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                textDirection: TextDirection.ltr,
-                style: const TextStyle(color: Colors.black, fontSize: 20),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              RichText(
-                text: TextSpan(children: [
-                  const TextSpan(
-                      text: "时间：",
-                      style: TextStyle(fontSize: 13, color: Colors.black45)),
-                  TextSpan(
-                      text: homeItem.niceDate ?? "",
-                      style:
-                          const TextStyle(fontSize: 14, color: Colors.black87)),
-                ]),
-              ),
-            ],
-          )),
-        ],
+                  }
+                },
+                icon: Icon(
+                  homeItem.collect! ? Icons.favorite : Icons.favorite_border,
+                  color: Colors.red,
+                )),
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    RichText(
+                      text: TextSpan(children: [
+                        const TextSpan(
+                            text: "作者：",
+                            style:
+                                TextStyle(fontSize: 13, color: Colors.black45)),
+                        TextSpan(
+                            text: homeItem.shareUser ?? "",
+                            style: const TextStyle(
+                                fontSize: 14, color: Colors.black87)),
+                      ]),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    RichText(
+                      text: TextSpan(children: [
+                        const TextSpan(
+                            text: "分类：",
+                            style:
+                                TextStyle(fontSize: 13, color: Colors.black45)),
+                        TextSpan(
+                            text: chapter,
+                            style: const TextStyle(
+                                fontSize: 14, color: Colors.black87)),
+                      ]),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  homeItem.title ?? "",
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  textDirection: TextDirection.ltr,
+                  style: const TextStyle(color: Colors.black, fontSize: 20),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                RichText(
+                  text: TextSpan(children: [
+                    const TextSpan(
+                        text: "时间：",
+                        style: TextStyle(fontSize: 13, color: Colors.black45)),
+                    TextSpan(
+                        text: homeItem.niceDate ?? "",
+                        style: const TextStyle(
+                            fontSize: 14, color: Colors.black87)),
+                  ]),
+                ),
+              ],
+            )),
+          ],
+        ),
       ),
     );
   }

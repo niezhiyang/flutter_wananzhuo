@@ -23,8 +23,7 @@ dependencies:
 #  dio_cookie_manager: ^2.0.0
 
   # Flutter中的webview
-  flutter_webview_plugin: ^0.4.0
-
+  webview_flutter: ^2.0.10
   # 上拉下拉空状态的ListView
 
   flutter_easyrefresh: ^2.2.1
@@ -52,6 +51,7 @@ dependencies:
 
  # 文件目录
   path_provider: ^2.0.2
+
 
 dev_dependencies:
   flutter_test:

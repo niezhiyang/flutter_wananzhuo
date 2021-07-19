@@ -9,6 +9,7 @@ import '../../model/home_response_entity.dart';
 class HomeRepository {
   /// 首页的文章
   Future<HomeResponseEntity> getHome(int index) async {
+
     Response response = await NetHelper.getDio().get<String>(
       "/user_article/list/$index/json",
     );

@@ -4,6 +4,8 @@ class BannerEntity with JsonConvert<BannerEntity> {
 	List<BannerData>? data;
 	int? errorCode;
 	String? errorMsg;
+	
+
 }
 
 class BannerData with JsonConvert<BannerData> {

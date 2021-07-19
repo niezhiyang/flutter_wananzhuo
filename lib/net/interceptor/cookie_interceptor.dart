@@ -10,13 +10,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 class CookieManager extends Interceptor {
   /// Cookie manager for http requests。Learn more details about
   /// CookieJar please refer to [cookie_jar](https://github.com/flutterchina/cookie_jar)
-  final PersistCookieJar cookieJar;
+  static CookieJar? cookieJar;
 
-  CookieManager(this.cookieJar);
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    cookieJar.loadForRequest(options.uri).then((cookies) {
+    cookieJar?.loadForRequest(options.uri).then((cookies) {
       var cookie = getCookies(cookies);
       if (cookie.isNotEmpty) {
         options.headers[HttpHeaders.cookieHeader] = cookie;
@@ -27,17 +26,6 @@ class CookieManager extends Interceptor {
       err.stackTrace = stackTrace;
       handler.reject(err, true);
     });
-
-    // getCookies1().then((cookie) {
-    //   if (cookie != null && cookie.isNotEmpty) {
-    //     options.headers[HttpHeaders.cookieHeader] = cookie;
-    //   }
-    //   handler.next(options);
-    // }).catchError((e, stackTrace) {
-    //   var err = DioError(requestOptions: options, error: e);
-    //   err.stackTrace = stackTrace;
-    //   handler.reject(err, true);
-    // });
   }
 
   @override
@@ -70,17 +58,13 @@ class CookieManager extends Interceptor {
   }
 
   Future<void> _saveCookies(Response response) async {
-    List<String>? cookies = response.headers[HttpHeaders.setCookieHeader];
+    var cookies = response.headers[HttpHeaders.setCookieHeader];
+
     if (cookies != null) {
-      await cookieJar.saveFromResponse(
+      await cookieJar?.saveFromResponse(
         response.requestOptions.uri,
         cookies.map((str) => Cookie.fromSetCookieValue(str)).toList(),
       );
-
-      // String cookiesString = cookies.map((s) => s).join("; ");
-      //
-      // SharedPreferences.getInstance()
-      //     .then((value) => {value.setString("cookie", cookiesString)});
     }
   }
 
@@ -88,9 +72,18 @@ class CookieManager extends Interceptor {
     return cookies.map((cookie) => '${cookie.name}=${cookie.value}').join('; ');
   }
 
-  static Future<String?> getCookies1() async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
+  static Future<PersistCookieJar> initPath() async {
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    String appDocPath = appDocDir.path;
+    var cookieJar = PersistCookieJar(
+        ignoreExpires: true, storage: FileStorage(appDocPath + "/.cookies/"));
 
-    return sp.getString("cookie");
+    return cookieJar;
   }
+
+
 }
+
+//JSESSIONID=B411CB9E43DCAA51952E71210B21D8BC; loginUserName=nzyandroid; token_pass=04ecc97792fce25e97b33ab44419cd3a; loginUserName_wanandroid_com=nzyandroid; token_pass_wanandroid_com=04ecc97792fce25e97b33ab44419cd3a
+//loginUserName=nzyandroid; Expires=Wed, 18-Aug-2021 03:34:50 GMT; Path=/; token_pass=04ecc97792fce25e97b33ab44419cd3a; Expires=Wed, 18-Aug-2021 03:34:50 GMT; Path=/; loginUserName_wanandroid_com=nzyandroid; Domain=wanandroid.com; Expires=Wed, 18-Aug-2021 03:34:50 GMT; Path=/; token_pass_wanandroid_com=04ecc97792fce25e97b33ab44419cd3a; Domain=wanandroid.com; Expires=Wed, 18-Aug-2021 03:34:50 GMT; Path=/
+//JSESSIONID=9E37A195B71B82DD9CCED0CB7BFA0317; loginUserName=nzyandroid; token_pass=04ecc97792fce25e97b33ab44419cd3a; loginUserName_wanandroid_com=nzyandroid; token_pass_wanandroid_com=04ecc97792fce25e97b33ab44419cd3a

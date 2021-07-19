@@ -26,12 +26,12 @@ class Toast {
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 color: Colors.black54),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               child: Text(
                 text,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 18,
                   decoration: TextDecoration.none,
                 ),
               ),
