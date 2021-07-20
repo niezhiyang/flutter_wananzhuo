@@ -25,10 +25,10 @@ class JsonConvert<T> {
 				return bannerEntityFromJson(data as BannerEntity, json) as T;
 			case BannerData:
 				return bannerDataFromJson(data as BannerData, json) as T;
+			case UserBase:
+				return userEntityFromJson(data as UserBase, json) as T;
 			case User:
-				return userEntityFromJson(data as User, json) as T;
-			case UserData:
-				return userDataFromJson(data as UserData, json) as T;
+				return userDataFromJson(data as User, json) as T;
 			case HomeResponseEntity:
 				return homeResponseEntityFromJson(data as HomeResponseEntity, json) as T;
 			case HomeResponseData:
@@ -44,10 +44,10 @@ class JsonConvert<T> {
 				return bannerEntityToJson(data as BannerEntity);
 			case BannerData:
 				return bannerDataToJson(data as BannerData);
+			case UserBase:
+				return userEntityToJson(data as UserBase);
 			case User:
-				return userEntityToJson(data as User);
-			case UserData:
-				return userDataToJson(data as UserData);
+				return userDataToJson(data as User);
 			case HomeResponseEntity:
 				return homeResponseEntityToJson(data as HomeResponseEntity);
 			case HomeResponseData:
@@ -66,11 +66,11 @@ class JsonConvert<T> {
 		if(type == (BannerData).toString()){
 			return BannerData().fromJson(json);
 		}
+		if(type == (UserBase).toString()){
+			return UserBase().fromJson(json);
+		}
 		if(type == (User).toString()){
 			return User().fromJson(json);
-		}
-		if(type == (UserData).toString()){
-			return UserData().fromJson(json);
 		}
 		if(type == (HomeResponseEntity).toString()){
 			return HomeResponseEntity().fromJson(json);
@@ -93,11 +93,11 @@ class JsonConvert<T> {
 		if(<BannerData>[] is M){
 			return data.map<BannerData>((e) => BannerData().fromJson(e)).toList() as M;
 		}
+		if(<UserBase>[] is M){
+			return data.map<UserBase>((e) => UserBase().fromJson(e)).toList() as M;
+		}
 		if(<User>[] is M){
 			return data.map<User>((e) => User().fromJson(e)).toList() as M;
-		}
-		if(<UserData>[] is M){
-			return data.map<UserData>((e) => UserData().fromJson(e)).toList() as M;
 		}
 		if(<HomeResponseEntity>[] is M){
 			return data.map<HomeResponseEntity>((e) => HomeResponseEntity().fromJson(e)).toList() as M;

@@ -13,7 +13,7 @@ class HomeRepository {
     Response response = await NetHelper.getDio().get<String>(
       "/user_article/list/$index/json",
     );
-    Map<String, dynamic> userMap = json.decode(response.data);
+    Map<String, dynamic> userMap = json.decode(response.toString());
     HomeResponseEntity home = HomeResponseEntity().fromJson(userMap);
     return home;
   }
@@ -23,7 +23,7 @@ class HomeRepository {
     Response response = await NetHelper.getDio().get<String>(
       "/banner/json",
     );
-    Map<String, dynamic> userMap = json.decode(response.data);
+    Map<String, dynamic> userMap = json.decode(response.toString());
     BannerEntity banner = BannerEntity().fromJson(userMap);
     return banner;
   }
@@ -35,7 +35,7 @@ class HomeRepository {
     Response response = await NetHelper.getDio().post<String>(
       "/lg/collect/$articId/json",
     );
-    Map<String, dynamic> userMap = json.decode(response.data);
+    Map<String, dynamic> userMap = json.decode(response.toString());
     BannerEntity banner = BannerEntity().fromJson(userMap);
     return banner;
   }
@@ -45,7 +45,7 @@ class HomeRepository {
     Response response = await NetHelper.getDio().post<String>(
       "/lg/collect/$articId/json",
     );
-    Map<String, dynamic> userMap = json.decode(response.data);
+    Map<String, dynamic> userMap = json.decode(response.toString());
     BannerEntity banner = BannerEntity().fromJson(userMap);
     return banner;
   }

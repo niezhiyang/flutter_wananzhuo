@@ -1,8 +1,8 @@
 import 'package:flutter_wananzhuo/model/user_entity.dart';
 
-userEntityFromJson(User data, Map<String, dynamic> json) {
+userEntityFromJson(UserBase data, Map<String, dynamic> json) {
 	if (json['data'] != null) {
-		data.data = UserData().fromJson(json['data']);
+		data.data = User().fromJson(json['data']);
 	}
 	if (json['errorCode'] != null) {
 		data.errorCode = json['errorCode'] is String
@@ -15,7 +15,7 @@ userEntityFromJson(User data, Map<String, dynamic> json) {
 	return data;
 }
 
-Map<String, dynamic> userEntityToJson(User entity) {
+Map<String, dynamic> userEntityToJson(UserBase entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['data'] = entity.data?.toJson();
 	data['errorCode'] = entity.errorCode;
@@ -23,7 +23,7 @@ Map<String, dynamic> userEntityToJson(User entity) {
 	return data;
 }
 
-userDataFromJson(UserData data, Map<String, dynamic> json) {
+userDataFromJson(User data, Map<String, dynamic> json) {
 	if (json['admin'] != null) {
 		data.admin = json['admin'];
 	}
@@ -74,7 +74,7 @@ userDataFromJson(UserData data, Map<String, dynamic> json) {
 	return data;
 }
 
-Map<String, dynamic> userDataToJson(UserData entity) {
+Map<String, dynamic> userDataToJson(User entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['admin'] = entity.admin;
 	data['chapterTops'] = entity.chapterTops;

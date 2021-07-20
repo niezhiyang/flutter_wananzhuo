@@ -6,7 +6,7 @@ class Toast {
   // static final BuildContext? context = _scaffoldMessengerKey.currentContext;
 
   static late BuildContext _context;
-  static bool isShow = false;
+  static bool _isShow = false;
 
   static void init(BuildContext context) {
     _context = context;
@@ -39,29 +39,15 @@ class Toast {
           ),
         );
       });
-      if (!isShow) {
+      if (!_isShow) {
         overlayState!.insert(overlayEntry);
-        isShow = true;
+        _isShow = true;
         await Future.delayed(const Duration(seconds: 1));
         overlayEntry.remove();
-        isShow = false;
+        _isShow = false;
       }
     }
   }
 }
 
-
-class Adsda extends StatefulWidget {
-  const Adsda({Key? key}) : super(key: key);
-
-  @override
-  _State createState() => _State();
-}
-
-class _State extends State<Adsda> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 

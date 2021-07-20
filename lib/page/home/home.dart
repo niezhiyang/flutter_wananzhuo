@@ -6,6 +6,7 @@ import 'package:flutter_wananzhuo/model/home_response_entity.dart';
 import 'package:flutter_wananzhuo/net/Repository/user_repository.dart';
 import 'package:flutter_wananzhuo/page/home/mine_page.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
+import 'package:flutter_wananzhuo/view/loading_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../../setting.dart';
@@ -54,10 +55,9 @@ class _HomePageState extends State<HomePage>
   final tabIcon = [Icons.home, Icons.search, Icons.person];
   final listPage = [FirstPage(), MinePage(), MinePage()];
 
-
   @override
   Widget build(BuildContext context) {
-    Toast.init(context);
+    initUtil();
     return Scaffold(
         bottomNavigationBar: _bottomNavigationBar(),
         body: IndexedStack(
@@ -81,7 +81,6 @@ class _HomePageState extends State<HomePage>
       onTap: _onItemTapped,
 
       // 如果 type 类型为 fixed，则通过 fixedColor 设置选中 item 的颜色
-      fixedColor: Colors.blue,
       items: _buildItem(),
     );
   }
@@ -116,7 +115,6 @@ class _HomePageState extends State<HomePage>
           ),
         ),
         onPressed: () {
-
           String color = "black";
           switch (i) {
             case 0:
@@ -143,4 +141,9 @@ class _HomePageState extends State<HomePage>
 
   @override
   bool get wantKeepAlive => true;
+
+  void initUtil() {
+    Toast.init(context);
+    LoadUtil.init(context);
+  }
 }

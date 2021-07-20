@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_wananzhuo/model/user_entity.dart';
 import 'package:provider/provider.dart';
 
 import 'page/wan.dart';
@@ -12,24 +13,6 @@ void main() {
   runApp(MultiProvider(providers: [
     // 更改主题颜色的
     ChangeNotifierProvider(create: (_) => ThemeState()),
-    ChangeNotifierProvider(create: (_) => Counter()),
+    ChangeNotifierProvider(create: (_) => User()),
   ], child: const WanApp()));
-}
-
-class Counter with ChangeNotifier, DiagnosticableTreeMixin {
-  int _count = 3;
-
-  int get count => _count;
-
-  void increment() {
-    _count++;
-    notifyListeners();
-  }
-
-  /// Makes `Counter` readable inside the devtools by listing all of its properties
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('count', count));
-  }
 }

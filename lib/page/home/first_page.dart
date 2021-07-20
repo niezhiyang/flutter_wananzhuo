@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_wananzhuo/banner/banner.dart';
-import 'package:flutter_wananzhuo/constans.dart';
 import 'package:flutter_wananzhuo/constans/easy_listview.dart';
 import 'package:flutter_wananzhuo/model/banner_entity.dart';
 import 'package:flutter_wananzhuo/model/home_response_entity.dart';
+import 'package:flutter_wananzhuo/model/user_entity.dart';
 import 'package:flutter_wananzhuo/net/Repository/home_repository.dart';
 import 'package:flutter_wananzhuo/page/article_details.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
+import 'package:flutter_wananzhuo/view/banner.dart';
+import 'package:provider/src/provider.dart';
 
 import '../../router.dart';
 
@@ -54,7 +55,9 @@ class FirstPagePageState extends State<FirstPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("首页"),),
+      appBar: AppBar(
+        title: const Text("首页"),
+      ),
       body: Stack(
         alignment: Alignment.center,
         children: [
@@ -146,6 +149,12 @@ class FirstPagePageState extends State<FirstPage> {
     String? chapter = homeItem.superChapterName;
     if (homeItem.chapterName != null) {
       chapter = "$chapter/${homeItem.chapterName}";
+    }
+
+    // 找到收集的
+    List<int>? collectIds = context.watch<User>().collectIds;
+    if (collectIds != null && collectIds.contains(homeItem.id)) {
+      homeItem.collect = true;
     }
     return GestureDetector(
       onTap: () {

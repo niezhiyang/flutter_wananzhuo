@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_wananzhuo/net/interceptor/cookie_interceptor.dart';
+import 'package:flutter_wananzhuo/wan_kit.dart';
 import 'package:provider/src/provider.dart';
 
 import '../router.dart';
@@ -12,7 +13,8 @@ class WanApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    initSomething();
+
+    Wankit.init(context);
     return ScreenUtilInit(
       builder: () {
         return MaterialApp(
@@ -31,10 +33,5 @@ class WanApp extends StatelessWidget {
     );
   }
 
-  void initSomething() {
-    // 初始化路径和cook
-    CookieManager.initPath().then((cookieJar) {
-      CookieManager.cookieJar = cookieJar;
-    });
-  }
+
 }

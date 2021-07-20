@@ -1,5 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_wananzhuo/model/user_entity.dart';
 import 'package:flutter_wananzhuo/router.dart';
+import 'package:flutter_wananzhuo/toast/toast.dart';
+import 'package:flutter_wananzhuo/wan_kit.dart';
+import 'package:provider/provider.dart';
 
 class MinePage extends StatefulWidget {
   const MinePage({Key? key}) : super(key: key);
@@ -11,6 +17,7 @@ class MinePage extends StatefulWidget {
 class _MinePageState extends State<MinePage> {
   @override
   Widget build(BuildContext context) {
+    String? name = context.watch<User>().username;
     return Scaffold(
         body: NestedScrollView(
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -41,8 +48,8 @@ class _MinePageState extends State<MinePage> {
                         height: 60,
                       ),
                     ),
-                    const Text(
-                      "请登录",
+                    Text(
+                      name ?? "请登录",
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -51,63 +58,72 @@ class _MinePageState extends State<MinePage> {
                   ],
                 ),
                 onTap: () {
-                  Navigator.of(context).pushNamed(RouterInit.login);
+                  if (Wankit.isLogin) {
+                    Toast.show("去个人详情页面了");
+                  } else {
+                    Navigator.of(context).pushNamed(RouterInit.login);
+                  }
                 },
               ),
-              background: _getChild2(),
+              background: Image.asset("assets/img/blue.webp",fit:BoxFit.cover)),
             ),
-          )
+
         ];
       },
-      body: Center(
-        child: ListView.builder(
+      body:  ListView.separated(
           padding: const EdgeInsets.all(16.0),
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
-            if (index.isOdd) return new Divider();
-            return ListItem(index / 2);
+            return ListItem(index);
           },
-          itemCount: 40,
-        ),
+          itemCount: title.length,
+          separatorBuilder: (BuildContext context, int index) {
+            return Divider(height: 1, color: Colors.black26);
+          },
       ),
     ));
   }
 
-  Widget ListItem(var index) {
-    return ListTile(
-      leading: const Icon(Icons.keyboard_arrow_right),
-      title: Text(
-        "条目$index",
-        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700),
-      ),
-    );
+  final title = ["应用设置", "我的收藏", "我的分享", "关于应用"];
+  final icon = [Icons.settings, Icons.favorite, Icons.share, Icons.pan_tool];
+
+  Widget ListItem(int index) {
+    return _buildItem(icon[index], title[index], "pageTo");
   }
 
-  Widget _getChild() {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Image.asset(
-          "assets/img/splash.webp",
+  Widget _headBlu() {
+    return Stack(children: [
+      //第一层
+      Positioned.fill(
+        child: Image.asset(
+          "assets/img/ocean.jpeg",
           fit: BoxFit.fill,
         ),
-        Center(
-          child: CircleAvatar(
-            backgroundColor: Colors.red,
-            radius: 75,
-            child: Image.asset(
-              'assets/img/default_avatar.jpeg',
-            ),
-          ),
-        )
-      ],
-    );
+      ),
+      //第二层高斯模糊
+      Positioned.fill(
+          child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 0.6, sigmaY: 0.6),
+        child: Container(
+          color: Colors.black.withOpacity(0.5),
+        ),
+      ))
+      //第三层
+    ]);
   }
 
-  Widget _getChild2() {
-    return Image.asset(
-      "assets/img/splash.webp",
-      fit: BoxFit.fill,
-    );
-  }
+  Widget _buildItem(IconData icon, String title, String pageTo) => ListTile(
+        leading: Icon(
+          icon,
+          color: Theme.of(context).primaryColor,
+        ),
+        title: Text(title),
+        trailing:
+            Icon(Icons.chevron_right, color: Theme.of(context).primaryColor),
+        onTap: () {
+          if (pageTo.isNotEmpty) {
+            Navigator.of(context).pushNamed(pageTo);
+          }
+        },
+      );
 }
