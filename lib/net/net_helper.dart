@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'interceptor/cookie_interceptor.dart';
+import 'interceptor/error_intercceptor.dart';
 import 'interceptor/log_interceptor.dart';
 
 class NetHelper {
@@ -19,6 +20,7 @@ class NetHelper {
 
   NetHelper._() {
     dio = Dio();
+    dio.interceptors.add(ErrorInterceptor());
     dio.interceptors.add(CookieManager());
     dio.interceptors.add(CustomInterceptors());
 
@@ -34,6 +36,4 @@ class NetHelper {
   static Dio getDio() {
     return netHelper.dio;
   }
-
-
 }

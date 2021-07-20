@@ -54,6 +54,7 @@ class FirstPagePageState extends State<FirstPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text("首页"),),
       body: Stack(
         alignment: Alignment.center,
         children: [
@@ -148,7 +149,6 @@ class FirstPagePageState extends State<FirstPage> {
     }
     return GestureDetector(
       onTap: () {
-
         ArticleDetailPage.push(context, homeItem);
       },
       child: Padding(
@@ -163,6 +163,8 @@ class FirstPagePageState extends State<FirstPage> {
                       setState(() {
                         _articleList[index].collect = false;
                       });
+                    }).onError((error, stackTrace) {
+                      Logger.e(error);
                     });
                   } else {
                     _repository.saveArticle(homeItem.id).then((value) {
@@ -170,6 +172,8 @@ class FirstPagePageState extends State<FirstPage> {
                       setState(() {
                         _articleList[index].collect = true;
                       });
+                    }).onError((error, stackTrace) {
+                      Logger.e(error);
                     });
                   }
                 },

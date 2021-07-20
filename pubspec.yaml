@@ -52,6 +52,7 @@ dependencies:
  # 文件目录
   path_provider: ^2.0.2
 
+  flutter_svg: ^0.22.0
 
 dev_dependencies:
   flutter_test:

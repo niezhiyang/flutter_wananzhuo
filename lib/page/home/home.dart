@@ -4,6 +4,7 @@ import 'package:flutter_wananzhuo/model/banner_entity.dart';
 import 'package:flutter_wananzhuo/net/Repository/home_repository.dart';
 import 'package:flutter_wananzhuo/model/home_response_entity.dart';
 import 'package:flutter_wananzhuo/net/Repository/user_repository.dart';
+import 'package:flutter_wananzhuo/page/home/mine_page.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
 import 'package:provider/provider.dart';
 
@@ -17,12 +18,13 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   void _onItemTapped(int postion) {
     if (mounted) {
       setState(() {
-        _pageController.animateToPage(postion,
-            duration: const Duration(milliseconds: 300), curve: Curves.ease);
+        // _pageController.animateToPage(postion,
+        //     duration: const Duration(milliseconds: 300), curve: Curves.ease);
         _currentIndex = postion;
       });
     }
@@ -39,38 +41,30 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: _currentIndex);
-
-
   }
 
   @override
   void dispose() {
     super.dispose();
-    _pageController.dispose();
   }
 
   int _currentIndex = 0;
 
   final tabTitle = ["首页", "发现", "我的"];
   final tabIcon = [Icons.home, Icons.search, Icons.person];
+  final listPage = [FirstPage(), MinePage(), MinePage()];
 
-  late PageController _pageController;
 
   @override
   Widget build(BuildContext context) {
     Toast.init(context);
     return Scaffold(
-        appBar: AppBar(title: const Text("Github")),
         bottomNavigationBar: _bottomNavigationBar(),
-        body: PageView(
-          controller: _pageController,
-          onPageChanged: _pageChaged,
-          children: _buildPageChild(),
+        body: IndexedStack(
+          index: _currentIndex,
+          children: listPage,
         ));
   }
-
-
 
   BottomNavigationBar _bottomNavigationBar() {
     return BottomNavigationBar(
@@ -91,7 +85,6 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
       items: _buildItem(),
     );
   }
-
 
   List<BottomNavigationBarItem> _buildItem() {
     var array = <BottomNavigationBarItem>[];
@@ -123,10 +116,6 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
           ),
         ),
         onPressed: () {
-          UserRepository userRepository = UserRepository();
-          userRepository.login().then((value) => {
-
-          });
 
           String color = "black";
           switch (i) {
@@ -141,22 +130,17 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin{
               break;
           }
           context.read<ThemeState>().changeThemeData(color);
-
-
         },
       );
-      if(i==0){
+      if (i == 0) {
         array.add(FirstPage());
-      }else{
+      } else {
         array.add(item);
       }
-
     }
     return array;
   }
 
   @override
   bool get wantKeepAlive => true;
-
-
 }
