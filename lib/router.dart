@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_wananzhuo/page/collect_page.dart';
 import 'package:flutter_wananzhuo/page/login_page.dart';
 
 import 'page/article_details.dart';
@@ -10,6 +11,8 @@ class RouterInit {
   static const login = "login";
   static const home = "home";
   static const article = "article";
+  static const collect = "collect";
+  static const setting = "setting";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -24,6 +27,9 @@ class RouterInit {
 
       case login:
         return Right2LeftRouter(child: const LoginPage(), settings: settings);
+
+      case collect:
+        return Right2LeftRouter(child: const CollectPage(), settings: settings);
       default:
         return MaterialPageRoute(builder: (BuildContext context) {
           return Scaffold(

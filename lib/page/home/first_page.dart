@@ -5,13 +5,13 @@ import 'package:flutter_wananzhuo/constans/easy_listview.dart';
 import 'package:flutter_wananzhuo/model/banner_entity.dart';
 import 'package:flutter_wananzhuo/model/home_response_entity.dart';
 import 'package:flutter_wananzhuo/model/user_entity.dart';
-import 'package:flutter_wananzhuo/net/Repository/home_repository.dart';
 import 'package:flutter_wananzhuo/page/article_details.dart';
+import 'package:flutter_wananzhuo/page/repository/home_repository.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
 import 'package:flutter_wananzhuo/view/banner.dart';
+import 'package:flutter_wananzhuo/view/load_layout.dart';
+import 'package:flutter_wananzhuo/wan_kit.dart';
 import 'package:provider/src/provider.dart';
-
-import '../../router.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -33,6 +33,7 @@ class FirstPagePageState extends State<FirstPage> {
   late EasyRefreshController _controller;
 
   late ScrollController _scrollController;
+  var loadState = LoadStatus.loading;
 
   @override
   void initState() {
@@ -41,8 +42,6 @@ class FirstPagePageState extends State<FirstPage> {
     _scrollController = ScrollController();
     _getNetData();
     // NetHelper
-
-    Logger.e("FirstPagePageState");
   }
 
   @override
@@ -58,49 +57,46 @@ class FirstPagePageState extends State<FirstPage> {
       appBar: AppBar(
         title: const Text("首页"),
       ),
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          Visibility(
-              child: const CircularProgressIndicator(), visible: _isFirstLoad),
-          EasyRefresh(
-            enableControlFinishRefresh: true,
-            enableControlFinishLoad: true,
-            controller: _controller,
-            scrollController: _scrollController,
-            header: ClassicalHeader(
-              refreshText: ConstansListView.pullToRefresh,
-              refreshReadyText: ConstansListView.releaseToRefresh,
-              refreshingText: ConstansListView.refreshing,
-              refreshedText: ConstansListView.refreshed,
-              refreshFailedText: ConstansListView.refreshFailed,
-              noMoreText: ConstansListView.noMore,
-              infoText: ConstansListView.updateAt,
-            ),
-            footer: ClassicalFooter(
-              loadText: ConstansListView.pushToLoad,
-              loadReadyText: ConstansListView.releaseToLoad,
-              loadingText: ConstansListView.loading,
-              loadedText: ConstansListView.loaded,
-              loadFailedText: ConstansListView.loadFailed,
-              noMoreText: ConstansListView.noMore,
-              infoText: ConstansListView.updateAt,
-            ),
-            onRefresh: _getNetData,
-            onLoad: _onLoad,
-            child: ListView.separated(
-                itemBuilder: (BuildContext context, int index) {
-                  if (index == 0) {
-                    return _headerItem();
-                  }
-                  return _articleItem(_articleList[index - 1], index - 1);
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return const Divider(height: 1, color: Colors.black12);
-                },
-                itemCount: _articleList.length + 1),
-          )
-        ],
+      body: LoadLayout(
+        EasyRefresh(
+          enableControlFinishRefresh: true,
+          enableControlFinishLoad: true,
+          controller: _controller,
+          scrollController: _scrollController,
+          header: ClassicalHeader(
+            refreshText: ConstansListView.pullToRefresh,
+            refreshReadyText: ConstansListView.releaseToRefresh,
+            refreshingText: ConstansListView.refreshing,
+            refreshedText: ConstansListView.refreshed,
+            refreshFailedText: ConstansListView.refreshFailed,
+            noMoreText: ConstansListView.noMore,
+            infoText: ConstansListView.updateAt,
+          ),
+          footer: ClassicalFooter(
+            loadText: ConstansListView.pushToLoad,
+            loadReadyText: ConstansListView.releaseToLoad,
+            loadingText: ConstansListView.loading,
+            loadedText: ConstansListView.loaded,
+            loadFailedText: ConstansListView.loadFailed,
+            noMoreText: ConstansListView.noMore,
+            infoText: ConstansListView.updateAt,
+          ),
+          onRefresh: _getNetData,
+          onLoad: _onLoad,
+          child: ListView.separated(
+              itemBuilder: (BuildContext context, int index) {
+                if (index == 0) {
+                  return _headerItem();
+                }
+                return _articleItem(_articleList[index - 1], index - 1);
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return const Divider(height: 1, color: Colors.black12);
+              },
+              itemCount: _articleList.length + 1),
+        ),
+        errorRetry: _getNetData,
+        loadStatus: loadState,
       ),
     );
   }
@@ -109,6 +105,7 @@ class FirstPagePageState extends State<FirstPage> {
     BannerEntity banner = value[1] as BannerEntity;
     if (mounted) {
       setState(() {
+        loadState =LoadStatus.content;
         _homeResponse = value[0] as HomeResponseEntity;
 
         List<HomeResponseDataDatas>? homeDataResponse =
@@ -152,10 +149,15 @@ class FirstPagePageState extends State<FirstPage> {
     }
 
     // 找到收集的
-    List<int>? collectIds = context.watch<User>().collectIds;
-    if (collectIds != null && collectIds.contains(homeItem.id)) {
-      homeItem.collect = true;
+    if (Wankit.isLogin) {
+      List<int>? collectIds = context.watch<User>().collectIds;
+      if (collectIds != null && collectIds.contains(homeItem.id)) {
+        homeItem.collect = true;
+      }
+    } else {
+      homeItem.collect = false;
     }
+
     return GestureDetector(
       onTap: () {
         ArticleDetailPage.push(context, homeItem);
@@ -261,6 +263,9 @@ class FirstPagePageState extends State<FirstPage> {
   }
 
   Future<void> _getNetData() async {
+    setState(() {
+      loadState = LoadStatus.loading;
+    });
     index = 0;
     Future<HomeResponseEntity> home = _repository.getHome(index);
     Future<BannerEntity> banner = _repository.geyBanner();
@@ -272,6 +277,10 @@ class FirstPagePageState extends State<FirstPage> {
       _controller.finishRefresh();
     }).onError((error, stackTrace) {
       Logger.e(error);
+      setState(() {
+        loadState =LoadStatus.netError;
+      });
+
       _controller.finishRefresh(success: false);
     });
   }
@@ -286,7 +295,7 @@ class FirstPagePageState extends State<FirstPage> {
         });
       }
       _controller.finishLoad(
-          success: true, noMore: value.data!.total! < _banners.length);
+          success: true, noMore: value.data!.total! <= _articleList.length);
       index++;
     }).onError((error, stackTrace) {
       Logger.e(error);

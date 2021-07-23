@@ -7,6 +7,10 @@ import 'package:flutter_wananzhuo/model/banner_entity.dart';
 import 'package:flutter_wananzhuo/generated/json/banner_entity_helper.dart';
 import 'package:flutter_wananzhuo/model/user_entity.dart';
 import 'package:flutter_wananzhuo/generated/json/user_entity_helper.dart';
+import 'package:flutter_wananzhuo/model/wx_article_entity.dart';
+import 'package:flutter_wananzhuo/generated/json/wx_article_entity_helper.dart';
+import 'package:flutter_wananzhuo/model/wx_offical_entity.dart';
+import 'package:flutter_wananzhuo/generated/json/wx_offical_entity_helper.dart';
 import 'package:flutter_wananzhuo/model/home_response_entity.dart';
 import 'package:flutter_wananzhuo/generated/json/home_response_entity_helper.dart';
 
@@ -26,9 +30,15 @@ class JsonConvert<T> {
 			case BannerData:
 				return bannerDataFromJson(data as BannerData, json) as T;
 			case UserBase:
-				return userEntityFromJson(data as UserBase, json) as T;
+				return userBaseFromJson(data as UserBase, json) as T;
 			case User:
-				return userDataFromJson(data as User, json) as T;
+				return userFromJson(data as User, json) as T;
+			case WxArticleEntity:
+				return wxArticleEntityFromJson(data as WxArticleEntity, json) as T;
+			case WxOfficalEntity:
+				return wxOfficalEntityFromJson(data as WxOfficalEntity, json) as T;
+			case WxOfficalData:
+				return wxOfficalDataFromJson(data as WxOfficalData, json) as T;
 			case HomeResponseEntity:
 				return homeResponseEntityFromJson(data as HomeResponseEntity, json) as T;
 			case HomeResponseData:
@@ -45,9 +55,15 @@ class JsonConvert<T> {
 			case BannerData:
 				return bannerDataToJson(data as BannerData);
 			case UserBase:
-				return userEntityToJson(data as UserBase);
+				return userBaseToJson(data as UserBase);
 			case User:
-				return userDataToJson(data as User);
+				return userToJson(data as User);
+			case WxArticleEntity:
+				return wxArticleEntityToJson(data as WxArticleEntity);
+			case WxOfficalEntity:
+				return wxOfficalEntityToJson(data as WxOfficalEntity);
+			case WxOfficalData:
+				return wxOfficalDataToJson(data as WxOfficalData);
 			case HomeResponseEntity:
 				return homeResponseEntityToJson(data as HomeResponseEntity);
 			case HomeResponseData:
@@ -71,6 +87,15 @@ class JsonConvert<T> {
 		}
 		if(type == (User).toString()){
 			return User().fromJson(json);
+		}
+		if(type == (WxArticleEntity).toString()){
+			return WxArticleEntity().fromJson(json);
+		}
+		if(type == (WxOfficalEntity).toString()){
+			return WxOfficalEntity().fromJson(json);
+		}
+		if(type == (WxOfficalData).toString()){
+			return WxOfficalData().fromJson(json);
 		}
 		if(type == (HomeResponseEntity).toString()){
 			return HomeResponseEntity().fromJson(json);
@@ -98,6 +123,15 @@ class JsonConvert<T> {
 		}
 		if(<User>[] is M){
 			return data.map<User>((e) => User().fromJson(e)).toList() as M;
+		}
+		if(<WxArticleEntity>[] is M){
+			return data.map<WxArticleEntity>((e) => WxArticleEntity().fromJson(e)).toList() as M;
+		}
+		if(<WxOfficalEntity>[] is M){
+			return data.map<WxOfficalEntity>((e) => WxOfficalEntity().fromJson(e)).toList() as M;
+		}
+		if(<WxOfficalData>[] is M){
+			return data.map<WxOfficalData>((e) => WxOfficalData().fromJson(e)).toList() as M;
 		}
 		if(<HomeResponseEntity>[] is M){
 			return data.map<HomeResponseEntity>((e) => HomeResponseEntity().fromJson(e)).toList() as M;

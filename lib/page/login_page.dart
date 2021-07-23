@@ -2,19 +2,14 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_wananzhuo/model/user_entity.dart';
-import 'package:flutter_wananzhuo/net/repository/user_repository.dart';
+import 'package:flutter_wananzhuo/page/repository/user_repository.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
 import 'package:flutter_wananzhuo/view/loading_dialog.dart';
 import 'package:flutter_wananzhuo/view/round.dart';
 import 'package:flutter_wananzhuo/wan_kit.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../constans.dart';
-import '../setting.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

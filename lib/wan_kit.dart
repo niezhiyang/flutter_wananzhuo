@@ -39,7 +39,7 @@ class Wankit {
     SharedPreferences.getInstance().then((sb) {
       return sb.getString(Constans.login);
     }).then((userStr) {
-      if (userStr != null) {
+      if (userStr!=null && userStr.isNotEmpty) {
         User user = User().fromJson(const JsonCodec().decode(userStr));
         context.read<User>().changeUser(user);
         isLogin = true;
@@ -53,6 +53,7 @@ class Wankit {
 
   /// 退出登录操作
   static void loginOut() async {
+    isLogin = false;
     SharedPreferences sb = await SharedPreferences.getInstance();
     sb.setString(Constans.login, "");
     CookieManager.cookieJar!.deleteAll();

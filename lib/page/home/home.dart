@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easylogger/flutter_logger.dart';
-import 'package:flutter_wananzhuo/model/banner_entity.dart';
-import 'package:flutter_wananzhuo/net/Repository/home_repository.dart';
 import 'package:flutter_wananzhuo/model/home_response_entity.dart';
-import 'package:flutter_wananzhuo/net/Repository/user_repository.dart';
 import 'package:flutter_wananzhuo/page/home/mine_page.dart';
+import 'package:flutter_wananzhuo/page/home/wechat_page.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
 import 'package:flutter_wananzhuo/view/loading_dialog.dart';
 import 'package:provider/provider.dart';
@@ -52,8 +49,8 @@ class _HomePageState extends State<HomePage>
   int _currentIndex = 0;
 
   final tabTitle = ["首页", "发现", "我的"];
-  final tabIcon = [Icons.home, Icons.search, Icons.person];
-  final listPage = [FirstPage(), MinePage(), MinePage()];
+  final tabIcon = [Icons.home, Icons.book, Icons.person];
+  final listPage = [FirstPage(), WechatAritclePage(), MinePage()];
 
   @override
   Widget build(BuildContext context) {

@@ -14,13 +14,7 @@ class ArticleDetailPage extends StatefulWidget {
 
   static void push(BuildContext context, HomeResponseDataDatas homeItem) {
     Navigator.of(context).pushNamed(RouterInit.article, arguments: homeItem);
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(
-    //       builder: (BuildContext context) {
-    //         return ArticleDetailPage();
-    //       },
-    //       settings: RouteSettings(arguments: homeItem)),
-    // );
+
   }
 }
 

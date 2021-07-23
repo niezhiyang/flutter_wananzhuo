@@ -1,6 +1,7 @@
 import 'package:flutter_wananzhuo/model/user_entity.dart';
+import 'package:flutter/material.dart';
 
-userEntityFromJson(UserBase data, Map<String, dynamic> json) {
+userBaseFromJson(UserBase data, Map<String, dynamic> json) {
 	if (json['data'] != null) {
 		data.data = User().fromJson(json['data']);
 	}
@@ -15,7 +16,7 @@ userEntityFromJson(UserBase data, Map<String, dynamic> json) {
 	return data;
 }
 
-Map<String, dynamic> userEntityToJson(UserBase entity) {
+Map<String, dynamic> userBaseToJson(UserBase entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['data'] = entity.data?.toJson();
 	data['errorCode'] = entity.errorCode;
@@ -23,7 +24,7 @@ Map<String, dynamic> userEntityToJson(UserBase entity) {
 	return data;
 }
 
-userDataFromJson(User data, Map<String, dynamic> json) {
+userFromJson(User data, Map<String, dynamic> json) {
 	if (json['admin'] != null) {
 		data.admin = json['admin'];
 	}
@@ -74,7 +75,7 @@ userDataFromJson(User data, Map<String, dynamic> json) {
 	return data;
 }
 
-Map<String, dynamic> userDataToJson(User entity) {
+Map<String, dynamic> userToJson(User entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['admin'] = entity.admin;
 	data['chapterTops'] = entity.chapterTops;

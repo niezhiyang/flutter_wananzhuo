@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/src/response.dart';
 import 'package:flutter_wananzhuo/model/banner_entity.dart';
+import 'package:flutter_wananzhuo/net/net_helper.dart';
 
-import '../net_helper.dart';
 import '../../model/home_response_entity.dart';
 
 class HomeRepository {

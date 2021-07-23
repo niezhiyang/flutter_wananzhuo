@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_wananzhuo/model/user_entity.dart';
+import 'package:flutter_wananzhuo/net/net_helper.dart';
 
-import '../net_helper.dart';
 
 class UserRepository {
   Future<String> login(String username, String password) async {

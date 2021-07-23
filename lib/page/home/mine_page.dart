@@ -34,83 +34,85 @@ class _MinePageState extends State<MinePage> {
             pinned: true,
             //是否固定在顶部,往上滑，导航栏可以隐藏
             flexibleSpace: FlexibleSpaceBar(
-              //可以展开区域，通常是一个FlexibleSpaceBar
-              centerTitle: true,
-              title: GestureDetector(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ClipOval(
-                      child: Image.asset(
-                        "assets/img/avatar.webp",
-                        fit: BoxFit.cover,
-                        width: 60,
-                        height: 60,
+                //可以展开区域，通常是一个FlexibleSpaceBar
+                centerTitle: true,
+                title: GestureDetector(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ClipOval(
+                        child: Image.asset(
+                          "assets/img/avatar.webp",
+                          fit: BoxFit.cover,
+                          width: 60,
+                          height: 60,
+                        ),
                       ),
-                    ),
-                    Text(
-                      name ?? "请登录",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
+                      Text(
+                        name ?? "请登录",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                  onTap: () {
+                    if (Wankit.isLogin) {
+                      Toast.show("去个人详情页面了");
+                    } else {
+                      Navigator.of(context).pushNamed(RouterInit.login);
+                    }
+                  },
                 ),
-                onTap: () {
-                  if (Wankit.isLogin) {
-                    Toast.show("去个人详情页面了");
-                  } else {
-                    Navigator.of(context).pushNamed(RouterInit.login);
-                  }
-                },
-              ),
-              background: Image.asset("assets/img/blue.webp",fit:BoxFit.cover)),
-            ),
-
+                background:
+                    Image.asset("assets/img/blue.webp", fit: BoxFit.cover)),
+          ),
         ];
       },
-      body:  ListView.separated(
-          padding: const EdgeInsets.all(16.0),
-          shrinkWrap: true,
-          itemBuilder: (BuildContext context, int index) {
-            return ListItem(index);
-          },
-          itemCount: title.length,
-          separatorBuilder: (BuildContext context, int index) {
-            return Divider(height: 1, color: Colors.black26);
-          },
+      body: ListView.separated(
+        padding: const EdgeInsets.all(16.0),
+        shrinkWrap: true,
+        itemBuilder: (BuildContext context, int index) {
+          return _buildListItem(index);
+        },
+        itemCount: title.length + 1,
+        separatorBuilder: (BuildContext context, int index) {
+          return Divider(height: 1, color: Colors.black26);
+        },
       ),
     ));
   }
 
   final title = ["应用设置", "我的收藏", "我的分享", "关于应用"];
   final icon = [Icons.settings, Icons.favorite, Icons.share, Icons.pan_tool];
+  final page = [RouterInit.setting, RouterInit.collect, "Icons.share", "Icons.pan_tool"];
 
-  Widget ListItem(int index) {
-    return _buildItem(icon[index], title[index], "pageTo");
+  Widget _buildListItem(int index) {
+    if (index == 4) {
+      return Container(
+          margin: const EdgeInsets.only(top: 50, left: 10, right: 10, bottom: 0),
+          height: 50,
+          width: MediaQuery.of(context).size.width,
+          child: MaterialButton(
+            elevation: 3,
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            color: Colors.blue,
+            minWidth: 60,
+            onPressed: _loginOut,
+            child: const Text("退出登录",
+                style: TextStyle(color: Colors.white, fontSize: 20)),
+          ));
+    }
+    return _buildItem(icon[index], title[index], page[index]);
   }
 
-  Widget _headBlu() {
-    return Stack(children: [
-      //第一层
-      Positioned.fill(
-        child: Image.asset(
-          "assets/img/ocean.jpeg",
-          fit: BoxFit.fill,
-        ),
-      ),
-      //第二层高斯模糊
-      Positioned.fill(
-          child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 0.6, sigmaY: 0.6),
-        child: Container(
-          color: Colors.black.withOpacity(0.5),
-        ),
-      ))
-      //第三层
-    ]);
+  void _loginOut() {
+    Wankit.loginOut();
   }
+
+
 
   Widget _buildItem(IconData icon, String title, String pageTo) => ListTile(
         leading: Icon(
