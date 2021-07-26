@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_wananzhuo/model/user_entity.dart';
+import 'package:flutter_wananzhuo/setting.dart';
 import 'package:provider/src/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,15 +40,20 @@ class Wankit {
     SharedPreferences.getInstance().then((sb) {
       return sb.getString(Constans.login);
     }).then((userStr) {
-      if (userStr!=null && userStr.isNotEmpty) {
+      if (userStr != null && userStr.isNotEmpty) {
         User user = User().fromJson(const JsonCodec().decode(userStr));
         context.read<User>().changeUser(user);
         isLogin = true;
       } else {
         isLogin = false;
       }
-    }).catchError((e){
-       Logger.e(e);
+    }).catchError((e) {
+      Logger.e(e);
+    });
+
+    SharedPreferences.getInstance().then((value) {
+      int? index = value.getInt("color_index");
+      context.read<ThemeState>().changeThemeData(index ?? 0);
     });
   }
 

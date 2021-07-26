@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage>
 
   int _currentIndex = 0;
 
-  final tabTitle = ["首页", "发现", "我的"];
+  final tabTitle = ["首页", "公众号", "我的"];
   final tabIcon = [Icons.home, Icons.book, Icons.person];
   final listPage = [FirstPage(), WechatAritclePage(), MinePage()];
 

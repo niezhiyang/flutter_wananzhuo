@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../setting.dart';
 
@@ -32,6 +33,7 @@ class _ColorSettingPageState extends State<ColorSettingPage> {
             return Card(child: InkWell(
               onTap: () {
                 context.read<ThemeState>().changeThemeData(index);
+                SharedPreferences.getInstance().then((value){value.setInt("color_index", index);});
               },
               child: Container(
                 width: 100,

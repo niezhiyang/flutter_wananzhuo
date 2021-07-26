@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wananzhuo/page/collect_page.dart';
 import 'package:flutter_wananzhuo/page/color_setting.dart';
 import 'package:flutter_wananzhuo/page/login_page.dart';
+import 'package:flutter_wananzhuo/page/search_page.dart';
 
 import 'page/article_details.dart';
 import 'page/home/home.dart';
@@ -14,6 +15,7 @@ class RouterInit {
   static const article = "article";
   static const collect = "collect";
   static const setting = "setting";
+  static const search = "search";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -31,8 +33,10 @@ class RouterInit {
 
       case collect:
         return Right2LeftRouter(child: const CollectPage(), settings: settings);
-        case setting:
-        return Right2LeftRouter(child:  ColorSettingPage(), settings: settings);
+      case setting:
+        return Right2LeftRouter(child: ColorSettingPage(), settings: settings);
+        case search:
+        return Right2LeftRouter(child: SearchPage(), settings: settings);
       default:
         return MaterialPageRoute(builder: (BuildContext context) {
           return Scaffold(

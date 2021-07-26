@@ -13,6 +13,7 @@ import 'package:provider/src/provider.dart';
 
 import '../../wan_kit.dart';
 import '../article_details.dart';
+import '../search_page.dart';
 
 class WechatAritclePage extends StatefulWidget {
   const WechatAritclePage({Key? key}) : super(key: key);
@@ -71,7 +72,9 @@ class _WechatAritclePageState extends State<WechatAritclePage>
           // 如果有 leading  这个不会管用 ； 如果没有leading ，当有侧边栏的时候， false：不会显示默认的图片，true 会显示 默认图片，并响应打开侧边栏的事件
           title: const Text("公众号"),
           centerTitle: true,
-          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
+          actions: [IconButton(onPressed: () {
+            SearchPage.push(context);
+          }, icon: Icon(Icons.search))],
           // 标题是否在居中
           bottom: _getTabBar(),
         ),

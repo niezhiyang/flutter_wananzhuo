@@ -14,6 +14,8 @@ import 'package:flutter_wananzhuo/view/load_layout.dart';
 import 'package:flutter_wananzhuo/wan_kit.dart';
 import 'package:provider/src/provider.dart';
 
+import '../search_page.dart';
+
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
 
@@ -56,6 +58,9 @@ class FirstPagePageState extends State<FirstPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [IconButton(onPressed: () {
+          SearchPage.push(context);
+        }, icon: Icon(Icons.search))],
         title: const Text("首页"),
       ),
       body: LoadLayout(
