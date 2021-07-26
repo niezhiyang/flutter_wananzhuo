@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_wananzhuo/router.dart';
 import 'package:flutter_wananzhuo/setting.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
@@ -72,10 +73,44 @@ class SearchBarDelegate extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    //点击了搜索显示的页面
-    return Center(
-      child: Text('123'),
-    );
+    return FutureBuilder(
+        future: _requestData(query),
+        builder: (context, snapshot) {
+          Logger.e("--------->${snapshot.connectionState  } ${snapshot.data}");
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              return Container();
+            // 当前没有连接到任何的异步任务
+            case ConnectionState.waiting:
+            // 连接到异步任务并等待进行交互
+            case ConnectionState.active:
+
+              return Container(
+                child: Center(
+                  child: Text("加载数据中..."),
+                ),
+              );
+            // 连接到异步任务并开始交互
+            case ConnectionState.done:
+              Logger.e("--------->done");
+              if (snapshot.hasError) {
+                Logger.e("--------->error");
+                return Container(
+                  child: Center(
+                    child: Text("加载数据失败"),
+                  ),
+                );
+              } else if (snapshot.hasData) {
+                Logger.e("--------->data ${snapshot.data}");
+                return Container(
+                  child: Center(
+                    child: Text("${snapshot.data}"),
+                  ),
+                );
+              }
+          }
+          return Container();
+        });
   }
 
   @override
@@ -87,6 +122,17 @@ class SearchBarDelegate extends SearchDelegate<String> {
   @override
   ThemeData appBarTheme(BuildContext context) {
     return ThemeConstans.themeList[context.read<ThemeState>().colorIndex];
+  }
+
+  // 添加了网络请求模拟方法
+  Future<String> _requestData(String queryContent) async {
+    return await Future.delayed(Duration(seconds: 2), () {
+      // 模拟有数据
+      Logger.e("aaaaaa");
+      return "搜索关键词：queryContent，我是网络请求的结果：没有";
+      // 模拟加载出错
+//      throw AssertionError("ERROR");
+    });
   }
 }
 
