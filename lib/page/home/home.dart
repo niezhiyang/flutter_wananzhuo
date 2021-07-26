@@ -65,20 +65,22 @@ class _HomePageState extends State<HomePage>
 
   BottomNavigationBar _bottomNavigationBar() {
     return BottomNavigationBar(
-      // BottomNavigationBarType 中定义的类型，有 fixed 和 shifting 两种类型
-      type: BottomNavigationBarType.fixed,
+        // BottomNavigationBarType 中定义的类型，有 fixed 和 shifting 两种类型
+        type: BottomNavigationBarType.fixed,
 
-      // BottomNavigationBarItem 中 icon 的大小
-      iconSize: 24.0,
+        // BottomNavigationBarItem 中 icon 的大小
+        iconSize: 24.0,
 
-      // 当前所高亮的按钮index
-      currentIndex: _currentIndex,
+        // 当前所高亮的按钮index
+        currentIndex: _currentIndex,
 
-      // 点击里面的按钮的回调函数，参数为当前点击的按钮 index
-      onTap: _onItemTapped,
+        // 点击里面的按钮的回调函数，参数为当前点击的按钮 index
+        onTap: _onItemTapped,
 
-      // 如果 type 类型为 fixed，则通过 fixedColor 设置选中 item 的颜色
-      items: _buildItem(),
+        // 如果 type 类型为 fixed，则通过 fixedColor 设置选中 item 的颜色
+        items: _buildItem(),
+        unselectedItemColor: Colors.grey,
+      selectedItemColor: Theme.of(context).primaryColor,
     );
   }
 
@@ -87,54 +89,17 @@ class _HomePageState extends State<HomePage>
 
     for (int i = 0; i < tabTitle.length; i++) {
       BottomNavigationBarItem item = BottomNavigationBarItem(
-        icon: Icon(tabIcon[i]),
-        label: tabTitle[i],
-      );
+          icon: Icon(
+            tabIcon[i],
+          ),
+        label:tabTitle[i],
+         );
       array.add(item);
     }
     return array;
   }
 
   HomeResponseEntity? home;
-
-  List<Widget> _buildPageChild() {
-    var array = <Widget>[];
-    for (int i = 0; i < tabTitle.length; i++) {
-      TextButton item = TextButton(
-        child: Container(
-          color: ThemeConstans.themeColorMap[context.watch<ThemeState>().color],
-          child: SizedBox(
-            width: 100,
-            height: 100,
-            child: Text(
-              "${home?.data?.datas?[0].chapterName}",
-            ),
-          ),
-        ),
-        onPressed: () {
-          String color = "black";
-          switch (i) {
-            case 0:
-              color = "deepPurple";
-              break;
-            case 1:
-              color = "black";
-              break;
-            case 2:
-              color = "deepOrange";
-              break;
-          }
-          context.read<ThemeState>().changeThemeData(color);
-        },
-      );
-      if (i == 0) {
-        array.add(FirstPage());
-      } else {
-        array.add(item);
-      }
-    }
-    return array;
-  }
 
   @override
   bool get wantKeepAlive => true;

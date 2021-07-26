@@ -199,7 +199,7 @@ class _CollectPageState extends State<CollectPage> {
                   },
                   icon: Icon(
                     homeItem.collect! ? Icons.favorite : Icons.favorite_border,
-                    color: Colors.red,
+                    color: Theme.of(context).primaryColor,
                   )),
               const SizedBox(
                 width: 10,

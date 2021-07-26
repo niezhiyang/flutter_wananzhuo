@@ -84,7 +84,7 @@ class _MinePageState extends State<MinePage> {
     ));
   }
 
-  final title = ["应用设置", "我的收藏", "我的分享", "关于应用"];
+  final title = ["颜色设置", "我的收藏", "我的分享", "关于应用"];
   final icon = [Icons.settings, Icons.favorite, Icons.share, Icons.pan_tool];
   final page = [RouterInit.setting, RouterInit.collect, "Icons.share", "Icons.pan_tool"];
 
@@ -98,7 +98,7 @@ class _MinePageState extends State<MinePage> {
             elevation: 3,
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20))),
-            color: Colors.blue,
+            color: Theme.of(context).primaryColor,
             minWidth: 60,
             onPressed: _loginOut,
             child: const Text("退出登录",

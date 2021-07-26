@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_wananzhuo/net/interceptor/cookie_interceptor.dart';
 import 'package:flutter_wananzhuo/wan_kit.dart';
@@ -13,16 +14,20 @@ class WanApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     Wankit.init(context);
     return ScreenUtilInit(
       builder: () {
         return MaterialApp(
             theme: ThemeData(
-                primaryColor: ThemeConstans
-                    .themeColorMap[context.watch<ThemeState>().color],
-                primaryColorLight: ThemeConstans
-                    .themeColorMap[context.watch<ThemeState>().color]),
+              primaryColor: ThemeConstans.themeList[ context.watch<ThemeState>().colorIndex].primaryColor,
+              primaryColorLight:
+                  ThemeConstans.themeList[ context.watch<ThemeState>().colorIndex].primaryColorLight,
+              primaryColorDark:
+                  ThemeConstans.themeList[ context.watch<ThemeState>().colorIndex].primaryColorDark,
+              accentColor: ThemeConstans.themeList[ context.watch<ThemeState>().colorIndex].accentColor,
+              bottomAppBarColor:
+                  ThemeConstans.themeList[ context.watch<ThemeState>().colorIndex].bottomAppBarColor,
+            ),
             // 去除右上角的fulter 标记
             debugShowCheckedModeBanner: false,
             // 所有的page集合
@@ -32,6 +37,4 @@ class WanApp extends StatelessWidget {
       designSize: const Size(360, 690),
     );
   }
-
-
 }

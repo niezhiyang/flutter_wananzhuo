@@ -1,0 +1,3 @@
+class ThemeModel {
+  String? yellow;
+}

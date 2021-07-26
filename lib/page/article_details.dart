@@ -14,18 +14,21 @@ class ArticleDetailPage extends StatefulWidget {
 
   static void push(BuildContext context, HomeResponseDataDatas homeItem) {
     Navigator.of(context).pushNamed(RouterInit.article, arguments: homeItem);
-
   }
 }
 
 class _ArticleDetailPageState extends State<ArticleDetailPage> {
   HomeResponseDataDatas? article;
   var isStart = false;
+  var progress = 0.0;
 
   @override
   Widget build(BuildContext context) {
     article =
-        ModalRoute.of(context)?.settings.arguments as HomeResponseDataDatas;
+    ModalRoute
+        .of(context)
+        ?.settings
+        .arguments as HomeResponseDataDatas;
     return Scaffold(
       appBar: AppBar(title: Text(article?.title ?? "")),
       body: Stack(
@@ -34,18 +37,24 @@ class _ArticleDetailPageState extends State<ArticleDetailPage> {
             javascriptMode: JavascriptMode.unrestricted,
             initialUrl: article?.link,
             onPageFinished: (url) {
-              // setState(() {
-              //   isStart = false;
-              // });
+              setState(() {
+                isStart = false;
+              });
             },
             onPageStarted: (url) {
-              // setState(() {
-              //   isStart = true;
-              // });
+              setState(() {
+                isStart = true;
+              });
+            },
+            onProgress: (p) {
+
+              setState(() {
+                progress = p/100;
+              });
             },
           ),
           Visibility(
-            child: Center(child: CircularProgressIndicator()),
+            child: LinearProgressIndicator(value: progress),
             visible: isStart,
           )
         ],

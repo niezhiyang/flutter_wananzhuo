@@ -43,9 +43,7 @@ class _LoginPageState extends State<LoginPage> {
             RoundedInputField(
               textEditingController: controllerName,
               hintText: "用户名",
-              cursorColor: Colors.black,
               editTextBackgroundColor: Colors.grey[200],
-              iconColor: Colors.black,
               onChanged: (value) {
                 name = value;
               },
@@ -59,14 +57,20 @@ class _LoginPageState extends State<LoginPage> {
                 name = value;
               },
             ),
-            MaterialButton(
-              shape: const StadiumBorder(
-                side: BorderSide(
-                    color: Colors.red, width: 2, style: BorderStyle.solid),
-              ),
-              onPressed: login,
-              child: const Text("登录"),
-            ),
+            Container(
+                margin: const EdgeInsets.only(top: 50, left: 50, right: 50, bottom: 0),
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                child: MaterialButton(
+                  elevation: 3,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  color: Theme.of(context).primaryColor,
+                  minWidth: 60,
+                  onPressed: login,
+                  child: const Text("退出登录",
+                      style: TextStyle(color: Colors.white, fontSize: 20)),
+                )),
             SizedBox(height: size.height * 0.03),
           ],
         ),

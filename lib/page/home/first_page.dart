@@ -7,6 +7,7 @@ import 'package:flutter_wananzhuo/model/home_response_entity.dart';
 import 'package:flutter_wananzhuo/model/user_entity.dart';
 import 'package:flutter_wananzhuo/page/article_details.dart';
 import 'package:flutter_wananzhuo/page/repository/home_repository.dart';
+import 'package:flutter_wananzhuo/router.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
 import 'package:flutter_wananzhuo/view/banner.dart';
 import 'package:flutter_wananzhuo/view/load_layout.dart';
@@ -134,7 +135,11 @@ class FirstPagePageState extends State<FirstPage> {
     } else {
       return Banners(
         click: (int position) {
-          Toast.show(_banners[position].title);
+        var bannerData =   _banners[position];
+        HomeResponseDataDatas datas = HomeResponseDataDatas();
+        datas.title = bannerData.title;
+        datas.link = bannerData.url;
+          ArticleDetailPage.push(context, datas);
         },
         tabs: _bannerUrl,
       );
@@ -190,7 +195,7 @@ class FirstPagePageState extends State<FirstPage> {
                 },
                 icon: Icon(
                   homeItem.collect! ? Icons.favorite : Icons.favorite_border,
-                  color: Colors.red,
+                  color: Theme.of(context).primaryColor,
                 )),
             const SizedBox(
               width: 10,

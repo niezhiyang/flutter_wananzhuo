@@ -89,7 +89,7 @@ class _WechatAritclePageState extends State<WechatAritclePage>
       isScrollable: true,
       labelColor: Colors.redAccent,
       // 选中的Widget颜色
-      indicatorColor: Colors.redAccent,
+      indicatorColor: Colors.white,
       // 选中的指示器颜色
       labelStyle: const TextStyle(fontSize: 18.0),
       // 必须设置，设置 color 没用的，因为 labelColor 已经设置了
@@ -316,7 +316,7 @@ class _TabViewItemState extends State<TabViewItem>
                   },
                   icon: Icon(
                     homeItem.collect! ? Icons.favorite : Icons.favorite_border,
-                    color: Colors.red,
+                    color: Theme.of(context).primaryColor,
                   )),
               const SizedBox(
                 width: 10,

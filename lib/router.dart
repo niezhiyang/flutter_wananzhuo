@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_wananzhuo/page/collect_page.dart';
+import 'package:flutter_wananzhuo/page/color_setting.dart';
 import 'package:flutter_wananzhuo/page/login_page.dart';
 
 import 'page/article_details.dart';
@@ -30,6 +31,8 @@ class RouterInit {
 
       case collect:
         return Right2LeftRouter(child: const CollectPage(), settings: settings);
+        case setting:
+        return Right2LeftRouter(child:  ColorSettingPage(), settings: settings);
       default:
         return MaterialPageRoute(builder: (BuildContext context) {
           return Scaffold(
