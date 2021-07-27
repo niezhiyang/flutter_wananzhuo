@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
+import '../wan_kit.dart';
+
 class Toast {
   // static final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
   //     GlobalKey<ScaffoldMessengerState>();
   // static final BuildContext? context = _scaffoldMessengerKey.currentContext;
 
-  static late BuildContext _context;
   static bool _isShow = false;
 
-  static void init(BuildContext context) {
-    _context = context;
-  }
+  Toast._();
 
   static void show(String? text) async {
     if(text==null){
       return;
     }
     if (text.isNotEmpty) {
-      OverlayState? overlayState = Overlay.of(_context);
+
+      OverlayState? overlayState = Wankit.navigatorKey.currentState?.overlay;
       OverlayEntry overlayEntry = OverlayEntry(builder: (BuildContext context) {
         return Center(
           child: Container(

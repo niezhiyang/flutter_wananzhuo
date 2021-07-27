@@ -68,12 +68,7 @@ class Left2RightRouter<T> extends PageRouteBuilder<T> {
             pageBuilder: (ctx, a1, a2) {
               return child;
             },
-            transitionsBuilder: (
-              ctx,
-              a1,
-              a2,
-              child,
-            ) {
+            transitionsBuilder: (ctx, a1, a2, child,) {
               return SlideTransition(
                   position: Tween<Offset>(
                     begin: Offset(-1.0, 0.0),
@@ -98,12 +93,7 @@ class Right2LeftRouter<T> extends PageRouteBuilder<T> {
             settings: settings,
             transitionDuration: Duration(milliseconds: durationMs),
             pageBuilder: (ctx, a1, a2) => child,
-            transitionsBuilder: (
-              ctx,
-              a1,
-              a2,
-              child,
-            ) =>
+            transitionsBuilder: (ctx, a1, a2, child,) =>
                 SlideTransition(
                   child: child,
                   position: Tween<Offset>(

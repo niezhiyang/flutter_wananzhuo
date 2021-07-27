@@ -12,6 +12,7 @@ class SearchPage extends StatefulWidget {
   _SearchPageState createState() => _SearchPageState();
 
   static void push(BuildContext context) {
+    Navigator.pop(context,"");
     Navigator.pushNamed(context, RouterInit.search);
   }
 }
@@ -75,42 +76,17 @@ class SearchBarDelegate extends SearchDelegate<String> {
   Widget buildResults(BuildContext context) {
     return FutureBuilder(
         future: _requestData(query),
-        builder: (context, snapshot) {
-          Logger.e("--------->${snapshot.connectionState  } ${snapshot.data}");
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-              return Container();
-            // 当前没有连接到任何的异步任务
-            case ConnectionState.waiting:
-            // 连接到异步任务并等待进行交互
-            case ConnectionState.active:
-
-              return Container(
-                child: Center(
-                  child: Text("加载数据中..."),
-                ),
-              );
-            // 连接到异步任务并开始交互
-            case ConnectionState.done:
-              Logger.e("--------->done");
-              if (snapshot.hasError) {
-                Logger.e("--------->error");
-                return Container(
-                  child: Center(
-                    child: Text("加载数据失败"),
-                  ),
-                );
-              } else if (snapshot.hasData) {
-                Logger.e("--------->data ${snapshot.data}");
-                return Container(
-                  child: Center(
-                    child: Text("${snapshot.data}"),
-                  ),
-                );
-              }
-          }
-          return Container();
-        });
+      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {      //snapshot就是_calculation在时间轴上执行过程的状态快照
+        switch (snapshot.connectionState) {
+          case ConnectionState.none: return new Text('Press button to start');    //如果_calculation未执行则提示：请点击开始
+          case ConnectionState.waiting: return new Text('Awaiting result...');  //如果_calculation正在执行则提示：加载中
+          default:    //如果_calculation执行完毕
+            if (snapshot.hasError)    //若_calculation执行出现异常
+              return new Text('Error: ${snapshot.error}');
+            else    //若_calculation执行正常完成
+              return new Text('Result: ${snapshot.data}');
+        }
+      },);
   }
 
   @override

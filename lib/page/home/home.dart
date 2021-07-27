@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_wananzhuo/model/home_response_entity.dart';
 import 'package:flutter_wananzhuo/page/home/mine_page.dart';
 import 'package:flutter_wananzhuo/page/home/wechat_page.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
 import 'package:flutter_wananzhuo/view/loading_dialog.dart';
-import 'package:provider/provider.dart';
-
-import '../../setting.dart';
+import '../../wan_kit.dart';
 import 'first_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -54,32 +53,33 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    initUtil();
-    return Scaffold(
-        bottomNavigationBar: _bottomNavigationBar(),
-        body: IndexedStack(
-          index: _currentIndex,
-          children: listPage,
-        ));
+    return WillPopScope(
+        child: Scaffold(
+            bottomNavigationBar: _bottomNavigationBar(),
+            body: IndexedStack(
+              index: _currentIndex,
+              children: listPage,
+            )),
+        onWillPop: _onPop);
   }
 
   BottomNavigationBar _bottomNavigationBar() {
     return BottomNavigationBar(
-        // BottomNavigationBarType 中定义的类型，有 fixed 和 shifting 两种类型
-        type: BottomNavigationBarType.fixed,
+      // BottomNavigationBarType 中定义的类型，有 fixed 和 shifting 两种类型
+      type: BottomNavigationBarType.fixed,
 
-        // BottomNavigationBarItem 中 icon 的大小
-        iconSize: 24.0,
+      // BottomNavigationBarItem 中 icon 的大小
+      iconSize: 24.0,
 
-        // 当前所高亮的按钮index
-        currentIndex: _currentIndex,
+      // 当前所高亮的按钮index
+      currentIndex: _currentIndex,
 
-        // 点击里面的按钮的回调函数，参数为当前点击的按钮 index
-        onTap: _onItemTapped,
+      // 点击里面的按钮的回调函数，参数为当前点击的按钮 index
+      onTap: _onItemTapped,
 
-        // 如果 type 类型为 fixed，则通过 fixedColor 设置选中 item 的颜色
-        items: _buildItem(),
-        unselectedItemColor: Colors.grey,
+      // 如果 type 类型为 fixed，则通过 fixedColor 设置选中 item 的颜色
+      items: _buildItem(),
+      unselectedItemColor: Colors.grey,
       selectedItemColor: Theme.of(context).primaryColor,
     );
   }
@@ -89,11 +89,11 @@ class _HomePageState extends State<HomePage>
 
     for (int i = 0; i < tabTitle.length; i++) {
       BottomNavigationBarItem item = BottomNavigationBarItem(
-          icon: Icon(
-            tabIcon[i],
-          ),
-        label:tabTitle[i],
-         );
+        icon: Icon(
+          tabIcon[i],
+        ),
+        label: tabTitle[i],
+      );
       array.add(item);
     }
     return array;
@@ -104,8 +104,21 @@ class _HomePageState extends State<HomePage>
   @override
   bool get wantKeepAlive => true;
 
+  var _lastQuitTime = DateTime.now();
+
+  Future<bool> _onPop() async {
+    if (DateTime.now().difference(_lastQuitTime).inSeconds > 1) {
+      Toast.show("再按一下退出");
+      _lastQuitTime = DateTime.now();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   void initUtil() {
-    Toast.init(context);
-    LoadUtil.init(context);
+    // Toast.init(context);
+    // LoadUtil.init(context);
+
   }
 }

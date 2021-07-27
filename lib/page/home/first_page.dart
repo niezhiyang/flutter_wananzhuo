@@ -41,6 +41,8 @@ class FirstPagePageState extends State<FirstPage> {
   @override
   void initState() {
     super.initState();
+
+
     _controller = EasyRefreshController();
     _scrollController = ScrollController();
     _getNetData();
@@ -180,10 +182,11 @@ class FirstPagePageState extends State<FirstPage> {
                 onPressed: () {
                   if (homeItem.collect!) {
                     _repository.cancelArticle(homeItem.id).then((value) {
-                      Toast.show("取消成功");
                       setState(() {
                         _articleList[index].collect = false;
                       });
+                      Toast.show("取消成功");
+
                     }).onError((error, stackTrace) {
                       Logger.e(error);
                     });
