@@ -32,10 +32,10 @@ dependencies:
   #  # 其中包括了SpUtil、ScreenUtil、TimelineUtil
   #  flustars: ^2.0.1
   # android 中运行时权限
-  permission_handler: ^8.1.2
+  permission_handler: ^8.1.4+2
 
   # 网络缓存图片
-  cached_network_image: ^3.0.0
+  cached_network_image: ^3.1.0
 
 #  # 轮播图 banner  自己去实现啊
 #  flutter_swiper: ^1.1.6
@@ -45,7 +45,7 @@ dependencies:
 
 
   # 华丽简单的日志打印
-  flutter_easylogger: ^2.0.1
+  flutter_easylogger: ^2.1.1
 
   cupertino_icons: ^1.0.2
 

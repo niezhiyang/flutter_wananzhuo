@@ -7,17 +7,19 @@ import 'package:provider/src/provider.dart';
 
 import '../router.dart';
 import '../setting.dart';
+import 'home/first/first_page.dart';
 import 'splash.dart';
 
 class WanApp extends StatelessWidget {
-  const WanApp({Key? key}) : super(key: key);
+  WanApp({Key? key}) : super(key: key);
+
   // GlobalKey<>
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: () {
         return MaterialApp(
-           navigatorKey: Wankit.navigatorKey,
+            navigatorKey: Wankit.navigatorKey,
             theme: _getTheme(context),
             // 去除右上角的fulter 标记
             debugShowCheckedModeBanner: false,
@@ -33,21 +35,29 @@ class WanApp extends StatelessWidget {
             //   },
             // },
             home: const SplashPage());
+            // home: FirstPage());
       },
       designSize: const Size(360, 690),
     );
   }
 
   _getTheme(BuildContext context) {
-   return  ThemeData(
-      primaryColor: ThemeConstans.themeList[ context.watch<ThemeState>().colorIndex].primaryColor,
-      primaryColorLight:
-      ThemeConstans.themeList[ context.watch<ThemeState>().colorIndex].primaryColorLight,
-      primaryColorDark:
-      ThemeConstans.themeList[ context.watch<ThemeState>().colorIndex].primaryColorDark,
-      accentColor: ThemeConstans.themeList[ context.watch<ThemeState>().colorIndex].accentColor,
-      bottomAppBarColor:
-      ThemeConstans.themeList[ context.watch<ThemeState>().colorIndex].bottomAppBarColor,
+    return ThemeData(
+      primaryColor: ThemeConstans
+          .themeList[context.watch<ThemeState>().colorIndex].primaryColor,
+      primaryColorLight: ThemeConstans
+          .themeList[context.watch<ThemeState>().colorIndex].primaryColorLight,
+      primaryColorDark: ThemeConstans
+          .themeList[context.watch<ThemeState>().colorIndex].primaryColorDark,
+      accentColor: ThemeConstans
+          .themeList[context.watch<ThemeState>().colorIndex].accentColor,
+      bottomAppBarColor: ThemeConstans
+          .themeList[context.watch<ThemeState>().colorIndex].bottomAppBarColor,
     );
   }
+
+
 }
+
+
+

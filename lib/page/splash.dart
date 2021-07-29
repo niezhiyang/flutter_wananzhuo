@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_wananzhuo/wan_kit.dart';
 
 import '../router.dart';
@@ -20,14 +21,18 @@ class _SplashPageState extends State<SplashPage> {
     SystemUiOverlayStyle systemUiOverlayStyle =
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-    WidgetsBinding.instance?.addPostFrameCallback((callback){
+    WidgetsBinding.instance?.addPostFrameCallback((callback) {
       Wankit.init();
-      Future.delayed(const Duration(seconds: 1)).then((value) => Navigator.of(context).pushReplacementNamed(RouterInit.home));
+      Future.delayed(const Duration(seconds: 1)).then((value) =>
+          Navigator.of(context).pushReplacementNamed(RouterInit.home));
     });
   }
 
   @override
   Widget build(BuildContext context) {
-       return Image.asset("assets/img/splash.webp",fit: BoxFit.fill,);
+    return Image.asset(
+      "assets/img/splash.webp",
+      fit: BoxFit.fill,
+    );
   }
 }

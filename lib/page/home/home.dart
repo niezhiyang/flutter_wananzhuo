@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_wananzhuo/model/home_response_entity.dart';
+import 'package:flutter_wananzhuo/page/home/first/first_page.dart';
 import 'package:flutter_wananzhuo/page/home/mine_page.dart';
 import 'package:flutter_wananzhuo/page/home/wechat_page.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
-import 'package:flutter_wananzhuo/view/loading_dialog.dart';
-import '../../wan_kit.dart';
-import 'first_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,34 +15,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
-  void _onItemTapped(int postion) {
-    if (mounted) {
-      setState(() {
-        // _pageController.animateToPage(postion,
-        //     duration: const Duration(milliseconds: 300), curve: Curves.ease);
-        _currentIndex = postion;
-      });
-    }
-  }
-
-  void _pageChaged(int postion) {
-    if (mounted) {
-      setState(() {
-        _currentIndex = postion;
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   int _currentIndex = 0;
 
   final tabTitle = ["首页", "公众号", "我的"];
@@ -75,7 +45,15 @@ class _HomePageState extends State<HomePage>
       currentIndex: _currentIndex,
 
       // 点击里面的按钮的回调函数，参数为当前点击的按钮 index
-      onTap: _onItemTapped,
+      onTap: (position) {
+        if (_currentIndex != position) {
+          if (mounted) {
+            setState(() {
+              _currentIndex = position;
+            });
+          }
+        }
+      },
 
       // 如果 type 类型为 fixed，则通过 fixedColor 设置选中 item 的颜色
       items: _buildItem(),
@@ -119,6 +97,5 @@ class _HomePageState extends State<HomePage>
   void initUtil() {
     // Toast.init(context);
     // LoadUtil.init(context);
-
   }
 }

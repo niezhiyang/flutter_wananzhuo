@@ -14,5 +14,8 @@ void main() {
     // 更改主题颜色的
     ChangeNotifierProvider(create: (_) => ThemeState()),
     ChangeNotifierProvider(create: (_) => User()),
-  ], child: const WanApp()));
+  ], child:  WanApp()));
 }
+
+
+
