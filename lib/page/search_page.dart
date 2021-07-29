@@ -12,7 +12,6 @@ class SearchPage extends StatefulWidget {
   _SearchPageState createState() => _SearchPageState();
 
   static void push(BuildContext context) {
-    Navigator.pop(context,"");
     Navigator.pushNamed(context, RouterInit.search);
   }
 }

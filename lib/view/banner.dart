@@ -26,7 +26,10 @@ class _BannerState extends State<Banners> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-    _tabConTroller = TabController(vsync: this, length: widget.tabs.length, );
+    _tabConTroller = TabController(
+      vsync: this,
+      length: widget.tabs.length,
+    );
     const timeout = const Duration(seconds: 2);
     timer = Timer.periodic(timeout, (timer) {
       second++;
@@ -80,7 +83,9 @@ class _BannerState extends State<Banners> with SingleTickerProviderStateMixin {
     List<Widget> children = [];
     for (int i = 0; i < widget.tabs.length; i++) {
       children.add(GestureDetector(
-        child: Image.network(widget.tabs[i], height: 200, fit: BoxFit.fill),
+        child:
+          Image.network(widget.tabs[i], height: 200, fit: BoxFit.cover),
+
         onTapUp: (detai) {
           widget.click(i);
         },
