@@ -28,13 +28,9 @@ class _MinePageState extends State<MinePage> {
             automaticallyImplyLeading: true,
             expandedHeight: 200.0,
             snap: true,
-            //与floating结合使用
             floating: true,
-//            title: _title(),
             pinned: true,
-            //是否固定在顶部,往上滑，导航栏可以隐藏
             flexibleSpace: FlexibleSpaceBar(
-                //可以展开区域，通常是一个FlexibleSpaceBar
                 centerTitle: true,
                 title: GestureDetector(
                   child: Row(

@@ -9,6 +9,7 @@ import 'package:flutter_wananzhuo/page/repository/home_repository.dart';
 import 'package:flutter_wananzhuo/page/repository/wechat_repository.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
 import 'package:flutter_wananzhuo/view/load_layout.dart';
+import 'package:flutter_wananzhuo/view/wan_refresh.dart';
 import 'package:provider/src/provider.dart';
 
 import '../../wan_kit.dart';
@@ -40,6 +41,7 @@ class _WechatAritclePageState extends State<WechatAritclePage>
   }
 
   void getWxOff() {
+    // 像这种可以存到sp或者数据库里面
     repository.getWxtOfficial().then((wxArticle) {
       if (wxArticle != null) {
         setState(() {
@@ -159,29 +161,9 @@ class _TabViewItemState extends State<TabViewItem>
   @override
   Widget build(BuildContext context) {
     return LoadLayout(
-      EasyRefresh(
-        enableControlFinishRefresh: true,
-        enableControlFinishLoad: true,
+      WanRefresh(
         controller: _controller,
         scrollController: _scrollController,
-        header: ClassicalHeader(
-          refreshText: ConstansListView.pullToRefresh,
-          refreshReadyText: ConstansListView.releaseToRefresh,
-          refreshingText: ConstansListView.refreshing,
-          refreshedText: ConstansListView.refreshed,
-          refreshFailedText: ConstansListView.refreshFailed,
-          noMoreText: ConstansListView.noMore,
-          infoText: ConstansListView.updateAt,
-        ),
-        footer: ClassicalFooter(
-          loadText: ConstansListView.pushToLoad,
-          loadReadyText: ConstansListView.releaseToLoad,
-          loadingText: ConstansListView.loading,
-          loadedText: ConstansListView.loaded,
-          loadFailedText: ConstansListView.loadFailed,
-          noMoreText: ConstansListView.noMore,
-          infoText: ConstansListView.updateAt,
-        ),
         onRefresh: _getNetData,
         onLoad: _onLoad,
         child: ListView.builder(

@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_wananzhuo/constans/easy_listview.dart';
-import 'package:flutter_wananzhuo/model/banner_entity.dart';
 import 'package:flutter_wananzhuo/model/home_response_entity.dart';
-import 'package:flutter_wananzhuo/model/user_entity.dart';
 import 'package:flutter_wananzhuo/page/article_details.dart';
-import 'package:flutter_wananzhuo/page/repository/home_repository.dart';
-import 'package:flutter_wananzhuo/router.dart';
-import 'package:flutter_wananzhuo/toast/toast.dart';
 import 'package:flutter_wananzhuo/view/banner.dart';
 import 'package:flutter_wananzhuo/view/load_layout.dart';
-import 'package:flutter_wananzhuo/wan_kit.dart';
-import 'package:provider/src/provider.dart';
+import 'package:flutter_wananzhuo/view/wan_refresh.dart';
+import 'package:provider/provider.dart';
 
 import '../../search_page.dart';
 import 'first_mode.dart';
@@ -66,56 +59,11 @@ class FirstPagePageState extends State<FirstPage> {
         ],
         title: const Text("首页"),
       ),
-      body: ValueListenableBuilder<FirstMode>(
-        valueListenable: _viewModel,
-        builder: (BuildContext context, FirstMode mode, Widget? child) {
-          return LoadLayout(
-            EasyRefresh(
-              enableControlFinishRefresh: true,
-              enableControlFinishLoad: true,
-              controller: _controller,
-              scrollController: _scrollController,
-              header: ClassicalHeader(
-                refreshText: ConstansListView.pullToRefresh,
-                refreshReadyText: ConstansListView.releaseToRefresh,
-                refreshingText: ConstansListView.refreshing,
-                refreshedText: ConstansListView.refreshed,
-                refreshFailedText: ConstansListView.refreshFailed,
-                noMoreText: ConstansListView.noMore,
-                infoText: ConstansListView.updateAt,
-              ),
-              footer: ClassicalFooter(
-                loadText: ConstansListView.pushToLoad,
-                loadReadyText: ConstansListView.releaseToLoad,
-                loadingText: ConstansListView.loading,
-                loadedText: ConstansListView.loaded,
-                loadFailedText: ConstansListView.loadFailed,
-                noMoreText: ConstansListView.noMore,
-                infoText: ConstansListView.updateAt,
-              ),
-              onRefresh: _viewModel.getNetData,
-              onLoad: _viewModel.onLoad,
-              child: ListView.separated(
-                  itemBuilder: (BuildContext context, int index) {
-                    if (index == 0) {
-                      return _headerItem(mode);
-                    }
-                    return _articleItem(mode.articleList[index - 1], index - 1);
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const Divider(height: 1, color: Colors.black12);
-                  },
-                  itemCount: mode.articleList.length + 1),
-            ),
-            errorRetry: _viewModel.getNetData,
-            loadStatus: mode.loadStatus,
-          );
-        },
-      ),
+      body: _getBodyForProvider(),
     );
   }
 
-  Widget _headerItem(FirstMode mode) {
+  Widget _headerItem(FirstModle mode) {
     if (mode.banners.isEmpty) {
       return const SizedBox(
         height: 200,
@@ -238,6 +186,52 @@ class FirstPagePageState extends State<FirstPage> {
           ],
         ),
       ),
+    );
+  }
+
+  /// 使用 ValueListenableBuilder 实现
+  Widget _getBody() {
+    return ValueListenableBuilder<FirstModle>(
+      valueListenable: _viewModel,
+      builder: (BuildContext context, FirstModle model, Widget? child) {
+        return _bodyChild(model);
+      },
+    );
+  }
+
+  /// 使用 ChangeNotifierProvider 实现
+  Widget _getBodyForProvider() {
+    return ChangeNotifierProvider(
+      create: (_) => _viewModel,
+      child: Consumer<FirstViewModel>(
+          builder: (context, FirstViewModel viewModel, child) {
+        FirstModle model = viewModel.value;
+        return _bodyChild(model);
+      }),
+    );
+  }
+
+  LoadLayout _bodyChild(FirstModle model) {
+    return LoadLayout(
+      WanRefresh(
+        controller: _controller,
+        scrollController: _scrollController,
+        onRefresh: _viewModel.getNetData,
+        onLoad: _viewModel.onLoad,
+        child: ListView.separated(
+            itemBuilder: (BuildContext context, int index) {
+              if (index == 0) {
+                return _headerItem(model);
+              }
+              return _articleItem(model.articleList[index - 1], index - 1);
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return const Divider(height: 1, color: Colors.black12);
+            },
+            itemCount: model.articleList.length + 1),
+      ),
+      errorRetry: _viewModel.getNetData,
+      loadStatus: model.loadStatus,
     );
   }
 }

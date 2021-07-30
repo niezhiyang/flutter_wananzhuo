@@ -10,7 +10,7 @@ import 'package:flutter_wananzhuo/view/load_layout.dart';
 
 import 'first_mode.dart';
 
-class FirstViewModel extends BaseViewModel<FirstMode> {
+class FirstViewModel extends BaseViewModel<FirstModle> {
   final HomeRepository _repository = HomeRepository();
 
   var index = 0;
@@ -20,8 +20,9 @@ class FirstViewModel extends BaseViewModel<FirstMode> {
 
   FirstViewModel(
       {required this.easyRefreshController, required this.scrollController})
-      : super(FirstMode());
+      : super(FirstModle());
 
+  /// 刷新或者是首次加载数据
   Future<void> getNetData() async {
     value.loadStatus = LoadStatus.loading;
 

@@ -2,7 +2,7 @@
 import 'package:flutter_wananzhuo/base/base_mode.dart';
 import 'package:flutter_wananzhuo/json/base/json_convert_content.dart';
 
-class HomeResponseEntity extends BaseMode with JsonConvert<HomeResponseEntity> {
+class HomeResponseEntity extends BaseModle with JsonConvert<HomeResponseEntity> {
 	HomeResponseData? data;
 	int? errorCode;
 	String? errorMsg;
