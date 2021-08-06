@@ -77,13 +77,13 @@ class SearchBarDelegate extends SearchDelegate<String> {
         future: _requestData(query),
       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {      //snapshot就是_calculation在时间轴上执行过程的状态快照
         switch (snapshot.connectionState) {
-          case ConnectionState.none: return new Text('Press button to start');    //如果_calculation未执行则提示：请点击开始
-          case ConnectionState.waiting: return new Text('Awaiting result...');  //如果_calculation正在执行则提示：加载中
+          case ConnectionState.none: return  Text('Press button to start');    //如果_calculation未执行则提示：请点击开始
+          case ConnectionState.waiting: return  Text('Awaiting result...');  //如果_calculation正在执行则提示：加载中
           default:    //如果_calculation执行完毕
             if (snapshot.hasError)    //若_calculation执行出现异常
-              return new Text('Error: ${snapshot.error}');
+              return  Text('Error: ${snapshot.error}');
             else    //若_calculation执行正常完成
-              return new Text('Result: ${snapshot.data}');
+              return  Text('Result: ${snapshot.data}');
         }
       },);
   }
@@ -188,7 +188,8 @@ class _SearchItemState extends State<SearchItem> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
         onTap: () {
-          Toast.show(widget.title);
+          FocusScope.of(context).requestFocus(FocusNode());
+          // Toast.show(widget.title);
         },
       ),
       color: Colors.white,

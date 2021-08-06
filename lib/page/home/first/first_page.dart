@@ -76,18 +76,21 @@ class FirstPagePageState extends State<FirstPage> {
   Widget _headerItem(FirstModle mode) {
     if (mode.banners.isEmpty) {
       return SizedBox(
-        height: 200.w,
+        height: 170.w,
       );
     } else {
-      return Banners(
-        click: (int position) {
-          var bannerData = mode.banners[position];
-          HomeResponseDataDatas datas = HomeResponseDataDatas();
-          datas.title = bannerData.title;
-          datas.link = bannerData.url;
-          ArticleDetailPage.push(context, datas);
-        },
-        tabs: mode.bannerUrl,
+      return Container(
+        margin: EdgeInsets.only(top: 15.h),
+        child: Banners(
+          click: (int position) {
+            var bannerData = mode.banners[position];
+            HomeResponseDataDatas datas = HomeResponseDataDatas();
+            datas.title = bannerData.title;
+            datas.link = bannerData.url;
+            ArticleDetailPage.push(context, datas);
+          },
+          tabs: mode.bannerUrl,
+        ),
       );
     }
     // return Image.network(mode.banners[0].imagePath!);

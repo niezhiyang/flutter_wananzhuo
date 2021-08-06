@@ -53,12 +53,12 @@ class _BannerState extends State<Banners> with SingleTickerProviderStateMixin {
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
         child: SizedBox(
-          height: 200.w,
+          height: 170.w,
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
               _buildTableBarView(),
-              Positioned(top: 165.w, child: _buildTabPageSelector()),
+              Positioned(top: 145.w, child: _buildTabPageSelector()),
             ],
           ),
         ));
@@ -66,7 +66,7 @@ class _BannerState extends State<Banners> with SingleTickerProviderStateMixin {
 
   Widget _buildTableBarView() {
     return SizedBox(
-      height: 200.w,
+      height: 170.w,
       child: TabBarView(controller: _tabConTroller, children: _getChilder()),
     );
   }
@@ -85,7 +85,8 @@ class _BannerState extends State<Banners> with SingleTickerProviderStateMixin {
     for (int i = 0; i < widget.tabs.length; i++) {
       children.add(GestureDetector(
         child:
-          Image.network(widget.tabs[i], height: 200.w, fit: BoxFit.cover),
+            ClipRRect(child:  Image.network(widget.tabs[i], height: 170.w, fit: BoxFit.cover),borderRadius: BorderRadius.circular(10.h),),
+
 
         onTapUp: (detai) {
           widget.click(i);
