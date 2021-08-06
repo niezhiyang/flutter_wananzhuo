@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_wananzhuo/model/user_entity.dart';
 import 'package:flutter_wananzhuo/setting.dart';
-import 'package:flutter_wananzhuo/toast/toast.dart';
-import 'package:flutter_wananzhuo/view/loading_dialog.dart';
 import 'package:provider/src/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,11 +14,12 @@ class Wankit {
   /// 是否登录
   static bool isLogin = false;
   static User? user;
+
   /// 不能用于 showdialog push overlayState，暂时只是用来读取provider
   /// 可以利用 navigatorKey.currentState.push
   /// overlayState 可以利用 navigatorKey.currentState.overlayState 拿到
   static late BuildContext context;
-  static  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   /// 按道理来说初始化完成所有的东西才能进入主页面
   static void init() {
@@ -35,8 +34,6 @@ class Wankit {
     // state.pushNamed(routeName)
     // Logger.e(state);
   }
-
-
 
   /// 存用户
   static void saveUser(User userTemp) {
@@ -78,10 +75,4 @@ class Wankit {
     User user = User();
     context.read<User>().changeUser(user);
   }
-
-  static Size getSize(){
-    Size size = MediaQuery.of(context).size;
-    return size;
-  }
-
 }

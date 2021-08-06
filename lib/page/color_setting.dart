@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_wananzhuo/utils/extension_util.dart';
 import 'package:provider/src/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,7 +22,7 @@ class _ColorSettingPageState extends State<ColorSettingPage> {
     return Scaffold(
         appBar: AppBar(title: Text("设置主题")),
         body: GridView.builder(
-          padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+          padding: EdgeInsets.only(top: 20.h, left: 10.h, right: 10.h),
           shrinkWrap: true,
           itemCount: ThemeConstans.themeList.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -36,12 +37,12 @@ class _ColorSettingPageState extends State<ColorSettingPage> {
                 SharedPreferences.getInstance().then((value){value.setInt("color_index", index);});
               },
               child: Container(
-                width: 100,
-                height: 100,
+                width: 100.h,
+                height: 100.h,
                 color: ThemeConstans.themeList[index].primaryColor,
               ),
-            ),shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(14.0))),);
+            ),shape:  RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(14.h))),);
           },
         ));
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wananzhuo/model/user_entity.dart';
 import 'package:flutter_wananzhuo/router.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
+import 'package:flutter_wananzhuo/utils/extension_util.dart';
 import 'package:flutter_wananzhuo/wan_kit.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +27,7 @@ class _MinePageState extends State<MinePage> {
             primary: true,
             forceElevated: false,
             automaticallyImplyLeading: true,
-            expandedHeight: 200.0,
+            expandedHeight: 200.h,
             snap: true,
             floating: true,
             pinned: true,
@@ -40,8 +41,8 @@ class _MinePageState extends State<MinePage> {
                         child: Image.asset(
                           "assets/img/avatar.webp",
                           fit: BoxFit.cover,
-                          width: 60,
-                          height: 60,
+                          width: 60.h,
+                          height: 60.h,
                         ),
                       ),
                       Text(
@@ -67,7 +68,7 @@ class _MinePageState extends State<MinePage> {
         ];
       },
       body: ListView.separated(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.all(16.h),
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
           return _buildListItem(index);
@@ -87,13 +88,13 @@ class _MinePageState extends State<MinePage> {
   Widget _buildListItem(int index) {
     if (index == 4) {
       return Container(
-          margin: const EdgeInsets.only(top: 50, left: 10, right: 10, bottom: 0),
+          margin:  EdgeInsets.only(top: 50.h, left: 10.h, right: 10.h, bottom: 0),
           height: 50,
           width: MediaQuery.of(context).size.width,
           child: MaterialButton(
             elevation: 3,
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20))),
+            shape:  RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.h))),
             color: Theme.of(context).primaryColor,
             minWidth: 60,
             onPressed: _loginOut,

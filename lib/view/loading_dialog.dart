@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_wananzhuo/utils/screen_util.dart';
 
 import '../wan_kit.dart';
 /// 返回键失效，不知怎么办呢，可以定义一个base widget，在 dispose 的时候关闭这个弹窗
@@ -16,8 +17,8 @@ class LoadUtil {
     overlayEntry = OverlayEntry(builder: (BuildContext context) {
       // 在这里拦截失败
       return WillPopScope(child:  Container(
-        width: Wankit.getSize().width,
-        height: Wankit.getSize().height,
+        width: screenWidth,
+        height: screenHeight,
         color: const Color(0x20000000),
         child: Center(
           child: Container(

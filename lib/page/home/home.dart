@@ -5,6 +5,7 @@ import 'package:flutter_wananzhuo/page/home/first/first_page.dart';
 import 'package:flutter_wananzhuo/page/home/mine_page.dart';
 import 'package:flutter_wananzhuo/page/home/wechat_page.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
+import 'package:flutter_wananzhuo/utils/extension_util.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _HomePageState extends State<HomePage>
       type: BottomNavigationBarType.fixed,
 
       // BottomNavigationBarItem 中 icon 的大小
-      iconSize: 24.0,
+      iconSize: 24.h,
 
       // 当前所高亮的按钮index
       currentIndex: _currentIndex,

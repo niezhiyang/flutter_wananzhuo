@@ -6,6 +6,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_wananzhuo/model/user_entity.dart';
 import 'package:flutter_wananzhuo/page/repository/user_repository.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
+import 'package:flutter_wananzhuo/utils/extension_util.dart';
+import 'package:flutter_wananzhuo/utils/screen_util.dart';
 import 'package:flutter_wananzhuo/view/loading_dialog.dart';
 import 'package:flutter_wananzhuo/view/round.dart';
 import 'package:flutter_wananzhuo/wan_kit.dart';
@@ -25,7 +27,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
         child: Column(
@@ -35,10 +36,10 @@ class _LoginPageState extends State<LoginPage> {
               "${context.watch<User>().username ?? "请登录"}",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: size.height * 0.03),
+            SizedBox(height: 300.h),
             SvgPicture.asset(
               "assets/img/login.svg",
-              height: size.height * 0.35,
+              height: screenHeight * 0.35,
             ),
             RoundedInputField(
               textEditingController: controllerName,
@@ -58,20 +59,20 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             Container(
-                margin: const EdgeInsets.only(top: 50, left: 50, right: 50, bottom: 0),
-                height: 50,
+                margin:  EdgeInsets.only(top: 50.h, left: 50.h, right: 50.h, bottom: 0),
+                height: 50.h,
                 width: MediaQuery.of(context).size.width,
                 child: MaterialButton(
                   elevation: 3,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  shape:  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.h))),
                   color: Theme.of(context).primaryColor,
                   minWidth: 60,
                   onPressed: login,
-                  child: const Text("退出登录",
-                      style: TextStyle(color: Colors.white, fontSize: 20)),
+                  child:  Text("退出登录",
+                      style: TextStyle(color: Colors.white, fontSize: 20.h)),
                 )),
-            SizedBox(height: size.height * 0.03),
+            SizedBox(height: screenHeightPx * 0.03),
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_wananzhuo/utils/extension_util.dart';
 
 //有参数的   先定义一个函数类型
 typedef ClickCallBack = Function(int position);
@@ -30,7 +31,7 @@ class _BannerState extends State<Banners> with SingleTickerProviderStateMixin {
       vsync: this,
       length: widget.tabs.length,
     );
-    const timeout = const Duration(seconds: 2);
+    const timeout =  Duration(seconds: 2);
     timer = Timer.periodic(timeout, (timer) {
       second++;
       _tabConTroller.animateTo(second % widget.tabs.length,
@@ -52,12 +53,12 @@ class _BannerState extends State<Banners> with SingleTickerProviderStateMixin {
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
         child: SizedBox(
-          height: 200,
+          height: 200.w,
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
               _buildTableBarView(),
-              Positioned(top: 165, child: _buildTabPageSelector()),
+              Positioned(top: 165.w, child: _buildTabPageSelector()),
             ],
           ),
         ));
@@ -65,7 +66,7 @@ class _BannerState extends State<Banners> with SingleTickerProviderStateMixin {
 
   Widget _buildTableBarView() {
     return SizedBox(
-      height: 200,
+      height: 200.w,
       child: TabBarView(controller: _tabConTroller, children: _getChilder()),
     );
   }
@@ -74,7 +75,7 @@ class _BannerState extends State<Banners> with SingleTickerProviderStateMixin {
     return TabPageSelector(
       controller: _tabConTroller,
       color: Colors.white,
-      indicatorSize: 10,
+      indicatorSize: 10.w,
       selectedColor: Colors.red,
     );
   }
@@ -84,7 +85,7 @@ class _BannerState extends State<Banners> with SingleTickerProviderStateMixin {
     for (int i = 0; i < widget.tabs.length; i++) {
       children.add(GestureDetector(
         child:
-          Image.network(widget.tabs[i], height: 200, fit: BoxFit.cover),
+          Image.network(widget.tabs[i], height: 200.w, fit: BoxFit.cover),
 
         onTapUp: (detai) {
           widget.click(i);

@@ -1,7 +1,12 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_wananzhuo/model/home_response_entity.dart';
 import 'package:flutter_wananzhuo/page/article_details.dart';
+import 'package:flutter_wananzhuo/utils/extension_util.dart';
+import 'package:flutter_wananzhuo/utils/screen_util.dart';
 import 'package:flutter_wananzhuo/view/banner.dart';
 import 'package:flutter_wananzhuo/view/load_layout.dart';
 import 'package:flutter_wananzhuo/view/wan_refresh.dart';
@@ -29,6 +34,11 @@ class FirstPagePageState extends State<FirstPage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((callback) {
+      Logger.e(
+          " 状态栏---${MediaQuery.of(context).padding.top} ====  width = ${MediaQuery.of(context).padding.bottom}");
+      Logger.e(" appbar---$screenHeightPx");
+    });
 
     _controller = EasyRefreshController();
     _scrollController = ScrollController();
@@ -65,8 +75,8 @@ class FirstPagePageState extends State<FirstPage> {
 
   Widget _headerItem(FirstModle mode) {
     if (mode.banners.isEmpty) {
-      return const SizedBox(
-        height: 200,
+      return SizedBox(
+        height: 200.w,
       );
     } else {
       return Banners(
@@ -81,6 +91,14 @@ class FirstPagePageState extends State<FirstPage> {
       );
     }
     // return Image.network(mode.banners[0].imagePath!);
+  }
+
+  Widget _headerItem1(FirstModle mode) {
+    return Container(
+      height: statusHeight,
+      width: screenWidth,
+      color: Colors.black,
+    );
   }
 
   Widget _articleItem(HomeResponseDataDatas homeItem, int position) {
@@ -104,7 +122,7 @@ class FirstPagePageState extends State<FirstPage> {
         ArticleDetailPage.push(context, homeItem);
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        padding:  EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.h),
         child: Row(
           children: [
             IconButton(
@@ -157,8 +175,8 @@ class FirstPagePageState extends State<FirstPage> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 10,
+                 SizedBox(
+                  height: 10.h,
                 ),
                 Text(
                   homeItem.title ?? "",
@@ -167,8 +185,8 @@ class FirstPagePageState extends State<FirstPage> {
                   textDirection: TextDirection.ltr,
                   style: const TextStyle(color: Colors.black, fontSize: 20),
                 ),
-                const SizedBox(
-                  height: 10,
+                 SizedBox(
+                  height: 10.h,
                 ),
                 RichText(
                   text: TextSpan(children: [

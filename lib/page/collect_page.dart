@@ -8,6 +8,7 @@ import 'package:flutter_wananzhuo/page/login/base_login_page.dart';
 import 'package:flutter_wananzhuo/page/repository/collect_repository.dart';
 import 'package:flutter_wananzhuo/page/repository/home_repository.dart';
 import 'package:flutter_wananzhuo/toast/toast.dart';
+import 'package:flutter_wananzhuo/utils/extension_util.dart';
 import 'package:flutter_wananzhuo/view/load_layout.dart';
 
 import 'article_details.dart';
@@ -161,9 +162,9 @@ class _CollectPageState extends State<CollectPage> {
     homeItem.collect = true;
 
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(14.0))), //设置圆角
+      margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 15.h),
+      shape:  RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(14.h))), //设置圆角
       elevation: 2,
       child: InkWell(
         onTap: () {
@@ -222,8 +223,8 @@ class _CollectPageState extends State<CollectPage> {
                                   fontSize: 14, color: Colors.black87)),
                         ]),
                       ),
-                      const SizedBox(
-                        width: 10,
+                       SizedBox(
+                        width: 10.h,
                       ),
                       RichText(
                         text: TextSpan(children: [
@@ -239,8 +240,8 @@ class _CollectPageState extends State<CollectPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
+                   SizedBox(
+                    height: 10.h,
                   ),
                   Text(
                     homeItem.title ?? "",
@@ -249,8 +250,8 @@ class _CollectPageState extends State<CollectPage> {
                     textDirection: TextDirection.ltr,
                     style: const TextStyle(color: Colors.black, fontSize: 20),
                   ),
-                  const SizedBox(
-                    height: 10,
+                   SizedBox(
+                    height: 10.h,
                   ),
                   RichText(
                     text: TextSpan(children: [
