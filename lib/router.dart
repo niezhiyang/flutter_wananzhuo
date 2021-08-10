@@ -5,7 +5,7 @@ import 'package:flutter_wananzhuo/page/login_page.dart';
 import 'package:flutter_wananzhuo/page/search_page.dart';
 
 import 'page/article_details.dart';
-import 'page/home/home.dart';
+import 'page/home/home/home.dart';
 import 'page/splash.dart';
 
 class RouterInit {

@@ -87,7 +87,6 @@ class FirstViewModel extends BaseViewModel<FirstModle> {
     }).whenComplete(() {
       notifyListeners();
     });
-    ;
   }
 
   /// 取消收藏

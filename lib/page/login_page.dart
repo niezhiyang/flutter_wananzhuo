@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
               "${context.watch<User>().username ?? "请登录"}",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 300.h),
+            SizedBox(height: 100.h),
             SvgPicture.asset(
               "assets/img/login.svg",
               height: screenHeight * 0.35,
@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                   color: Theme.of(context).primaryColor,
                   minWidth: 60,
                   onPressed: login,
-                  child:  Text("退出登录",
+                  child:  Text("登录",
                       style: TextStyle(color: Colors.white, fontSize: 20.h)),
                 )),
             SizedBox(height: screenHeightPx * 0.03),

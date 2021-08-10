@@ -16,6 +16,7 @@ import '../../search_page.dart';
 import 'first_mode.dart';
 import 'first_viewmodel.dart';
 
+/// 这里根源的MVVM不改，其他的用 ChangeProvider base类写
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
 

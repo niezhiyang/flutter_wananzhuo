@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-/**
- *  @author niezhiyang
- *  since 2021/7/21
- */
 const loadingStr = "加载中...";
 const loadErrorStr = "加载失败，点我重试";
 const loadEmptyStr = "暂无数据，请稍后重试";

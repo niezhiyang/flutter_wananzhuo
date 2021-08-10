@@ -33,6 +33,13 @@ class Wankit {
     // var state = navigatorKey.currentState;
     // state.pushNamed(routeName)
     // Logger.e(state);
+
+    ErrorWidget.builder = (FlutterErrorDetails flutterErrorDetails){
+      Logger.e(flutterErrorDetails.toString());
+      return Center(
+        child: Text("Flutter 走神了"),
+      );
+    };
   }
 
   /// 存用户
