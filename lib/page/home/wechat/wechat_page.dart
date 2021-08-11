@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wananzhuo/model/wx_offical_entity.dart';
 import 'package:flutter_wananzhuo/page/home/wechat/wechat_repository.dart';
 import 'package:flutter_wananzhuo/page/home/wechat/wx_tab_item_page.dart';
+import 'package:flutter_wananzhuo/page/home/wechat2/wx_tab_item_page.dart';
 import 'package:flutter_wananzhuo/page/search_page.dart';
 import 'package:flutter_wananzhuo/view/load_layout.dart';
 class WechatAritclePage extends StatefulWidget {
@@ -104,7 +105,8 @@ class _WechatAritclePageState extends State<WechatAritclePage>
     return TabBarView(
       controller: _tabController,
       children: _articList.map((WxOfficalData articWx) {
-        return TabViewItem(articWx.id!);
+        return WxTabItemPage(articWx.id!);
+        // return TabViewItem(articWx.id!);
       }).toList(),
     );
   }

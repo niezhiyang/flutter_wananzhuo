@@ -21,17 +21,24 @@ class _HomePageState extends State<HomePage>
   final tabTitle = ["首页", "公众号", "我的"];
   final tabIcon = [Icons.home, Icons.book, Icons.person];
   final listPage = [FirstPage(), WechatAritclePage(), MinePage()];
-
+  HomeViewModel viewModel = HomeViewModel();
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        child: ProviderWidget(
-          model: HomeViewModel(),
-          builder: (BuildContext context, HomeViewModel model, Widget? child) {
+        child: ProviderWidget<HomeViewModel>(
+          model: viewModel,
+          onModelInit: (model) {
+            viewModel.changeIndex(1);
+          },
+          builder: (BuildContext context, HomeViewModel viewModel, Widget? child) {
             return Scaffold(
-                bottomNavigationBar: _bottomNavigationBar(model),
+                bottomNavigationBar: _bottomNavigationBar(viewModel),
                 body: IndexedStack(
-                  index: model.currentIndex,
+                  index: viewModel.currentIndex,
                   children: listPage,
                 ));
           },
@@ -39,7 +46,7 @@ class _HomePageState extends State<HomePage>
         onWillPop: _onPop);
   }
 
-  BottomNavigationBar _bottomNavigationBar(HomeViewModel model) {
+  BottomNavigationBar _bottomNavigationBar(HomeViewModel viewModel) {
     return BottomNavigationBar(
       // BottomNavigationBarType 中定义的类型，有 fixed 和 shifting 两种类型
       type: BottomNavigationBarType.fixed,
@@ -48,11 +55,11 @@ class _HomePageState extends State<HomePage>
       iconSize: 24.h,
 
       // 当前所高亮的按钮index
-      currentIndex: model.currentIndex,
+      currentIndex: viewModel.currentIndex,
 
       // 点击里面的按钮的回调函数，参数为当前点击的按钮 index
       onTap: (position) {
-         model.changeIndex(position);
+        viewModel.changeIndex(position);
       },
 
       // 如果 type 类型为 fixed，则通过 fixedColor 设置选中 item 的颜色

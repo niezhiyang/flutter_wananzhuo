@@ -67,7 +67,7 @@ class FirstViewModel extends BaseViewModel<FirstModle> {
       value.articleList.addAll(homeRes.data!.datas!);
       easyRefreshController.finishLoad(
           success: true,
-          noMore: homeRes.data!.total! <= value.articleList.length);
+          noMore: homeRes.data!.total !<= value.articleList.length);
       index++;
     }).onError((error, stackTrace) {
       Logger.e(error);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:provider/provider.dart';
 
 class ProviderWidget<T extends ChangeNotifier> extends StatefulWidget {
@@ -11,7 +12,6 @@ class ProviderWidget<T extends ChangeNotifier> extends StatefulWidget {
 
   //数据初始化方法
   final Function(T)? onModelInit;
-
   const ProviderWidget(
       {Key? key,
       required this.model,

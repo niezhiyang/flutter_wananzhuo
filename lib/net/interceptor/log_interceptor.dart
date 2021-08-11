@@ -26,7 +26,7 @@ class CustomInterceptors extends Interceptor {
     // Logger.d("请求返回的请求是：${response.realUri}  , 返回码是：${response.statusCode}",
     //     tag: "http请求");
     // Logger.json(response.toString(), tag: "http请求");
-    // print(response.toString());
+    print(response.toString());
     super.onResponse(response, handler);
   }
 }
