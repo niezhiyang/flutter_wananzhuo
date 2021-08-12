@@ -8,7 +8,7 @@ import 'splash.dart';
 
 class WanApp extends StatelessWidget {
   WanApp({Key? key}) : super(key: key);
-
+  RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
   // GlobalKey<>
   @override
   Widget build(BuildContext context) {
@@ -28,6 +28,7 @@ class WanApp extends StatelessWidget {
         //     return Center();
         //   },
         // },
+        navigatorObservers: [routeObserver],
         home: const SplashPage());
   }
 

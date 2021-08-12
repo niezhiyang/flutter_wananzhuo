@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_wananzhuo/utils/extension_util.dart';
+import 'package:flutter_wananzhuo/utils/image.dart';
 
 //有参数的   先定义一个函数类型
 typedef ClickCallBack = Function(int position);
@@ -85,7 +86,7 @@ class _BannerState extends State<Banners> with SingleTickerProviderStateMixin {
     for (int i = 0; i < widget.tabs.length; i++) {
       children.add(GestureDetector(
         child:
-            ClipRRect(child:  Image.network(widget.tabs[i], height: 170.w, fit: BoxFit.cover),borderRadius: BorderRadius.circular(10.h),),
+            ClipRRect(child:  image(widget.tabs[i], height: 170.w,),borderRadius: BorderRadius.circular(10.w),),
 
 
         onTapUp: (detai) {

@@ -61,10 +61,12 @@ dependencies:
   animations: ^2.0.1
 
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+#  json_serializable: ^5.0.0
   flutter_lints: ^1.0.0
 
 flutter:

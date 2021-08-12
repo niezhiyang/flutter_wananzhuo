@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage>
         child: ProviderWidget<HomeViewModel>(
           model: viewModel,
           onModelInit: (model) {
-            viewModel.changeIndex(1);
+            // viewModel.changeIndex(1);
           },
           builder: (BuildContext context, HomeViewModel viewModel, Widget? child) {
             return Scaffold(
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage>
       type: BottomNavigationBarType.fixed,
 
       // BottomNavigationBarItem 中 icon 的大小
-      iconSize: 24.h,
+      iconSize: 24.w,
 
       // 当前所高亮的按钮index
       currentIndex: viewModel.currentIndex,

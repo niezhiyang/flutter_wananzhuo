@@ -37,6 +37,7 @@ abstract class BaseListViewModel<T, M extends BaseListMode<T>>
 
   ///下拉刷新 或者 是首次加载
   void refresh()  {
+    index = 0;
     NetHelper.getDio()
         .get<String>(getUrl(index)
             // "/user_article/list/$index/json",
@@ -73,7 +74,7 @@ abstract class BaseListViewModel<T, M extends BaseListMode<T>>
             )
         .then((response) {
       var jsonRes = json.decode(response.toString());
-      M model = getModel(jsonRes);
+      M model = getModel(jsonRes["data"]);
       itemList.addAll(model.datas);
       controller.finishLoad(
           success: true, noMore: model.total <= itemList.length);

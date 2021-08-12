@@ -27,7 +27,7 @@ class _MinePageState extends State<MinePage> {
             primary: true,
             forceElevated: false,
             automaticallyImplyLeading: true,
-            expandedHeight: 200.h,
+            expandedHeight: 200.w,
             snap: true,
             floating: true,
             pinned: true,
@@ -41,8 +41,8 @@ class _MinePageState extends State<MinePage> {
                         child: Image.asset(
                           "assets/img/avatar.webp",
                           fit: BoxFit.cover,
-                          width: 60.h,
-                          height: 60.h,
+                          width: 60.w,
+                          height: 60.w,
                         ),
                       ),
                       Text(
@@ -68,7 +68,7 @@ class _MinePageState extends State<MinePage> {
         ];
       },
       body: ListView.separated(
-        padding:  EdgeInsets.all(16.h),
+        padding:  EdgeInsets.all(16.w),
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
           return _buildListItem(index);
@@ -88,13 +88,13 @@ class _MinePageState extends State<MinePage> {
   Widget _buildListItem(int index) {
     if (index == 4) {
       return Container(
-          margin:  EdgeInsets.only(top: 50.h, left: 10.h, right: 10.h, bottom: 0),
+          margin:  EdgeInsets.only(top: 50.w, left: 10.w, right: 10.w, bottom: 0),
           height: 50,
           width: MediaQuery.of(context).size.width,
           child: MaterialButton(
             elevation: 3,
             shape:  RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.h))),
+                borderRadius: BorderRadius.all(Radius.circular(20.w))),
             color: Theme.of(context).primaryColor,
             minWidth: 60,
             onPressed: _loginOut,

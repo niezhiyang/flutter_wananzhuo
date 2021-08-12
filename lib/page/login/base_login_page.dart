@@ -27,6 +27,7 @@ class _BaseLoginWidgetState extends State<BaseLoginWidget> {
 
   @override
   Widget build(BuildContext context) {
+    Logger.e("ddddd ${Wankit.isLogin}");
     if (!Wankit.isLogin) {
       return const Center(
         child: CircularProgressIndicator(),

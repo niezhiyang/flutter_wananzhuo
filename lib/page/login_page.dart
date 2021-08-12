@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
               "${context.watch<User>().username ?? "请登录"}",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 100.h),
+            SizedBox(height: 100.w),
             SvgPicture.asset(
               "assets/img/login.svg",
               height: screenHeight * 0.35,
@@ -59,18 +59,18 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             Container(
-                margin:  EdgeInsets.only(top: 50.h, left: 50.h, right: 50.h, bottom: 0),
-                height: 50.h,
+                margin:  EdgeInsets.only(top: 50.w, left: 50.w, right: 50.w, bottom: 0),
+                height: 50.w,
                 width: MediaQuery.of(context).size.width,
                 child: MaterialButton(
                   elevation: 3,
                   shape:  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20.h))),
+                      borderRadius: BorderRadius.all(Radius.circular(20.w))),
                   color: Theme.of(context).primaryColor,
                   minWidth: 60,
                   onPressed: login,
                   child:  Text("登录",
-                      style: TextStyle(color: Colors.white, fontSize: 20.h)),
+                      style: TextStyle(color: Colors.white, fontSize: 20.w)),
                 )),
             SizedBox(height: screenHeightPx * 0.03),
           ],

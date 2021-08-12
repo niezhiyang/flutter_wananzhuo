@@ -81,7 +81,7 @@ class FirstPagePageState extends State<FirstPage> {
       );
     } else {
       return Container(
-        margin: EdgeInsets.only(top: 15.h),
+        margin: EdgeInsets.only(top: 15.w),
         child: Banners(
           click: (int position) {
             var bannerData = mode.banners[position];
@@ -126,7 +126,7 @@ class FirstPagePageState extends State<FirstPage> {
         ArticleDetailPage.push(context, homeItem);
       },
       child: Padding(
-        padding:  EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.h),
+        padding:  EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.w),
         child: Row(
           children: [
             IconButton(
@@ -180,7 +180,7 @@ class FirstPagePageState extends State<FirstPage> {
                   ],
                 ),
                  SizedBox(
-                  height: 10.h,
+                  height: 10.w,
                 ),
                 Text(
                   homeItem.title ?? "",
@@ -190,7 +190,7 @@ class FirstPagePageState extends State<FirstPage> {
                   style: const TextStyle(color: Colors.black, fontSize: 20),
                 ),
                  SizedBox(
-                  height: 10.h,
+                  height: 10.w,
                 ),
                 RichText(
                   text: TextSpan(children: [
