@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_wananzhuo/wan_kit.dart';
 import 'package:provider/src/provider.dart';
@@ -28,7 +29,9 @@ class WanApp extends StatelessWidget {
         //     return Center();
         //   },
         // },
-        navigatorObservers: [routeObserver],
+        locale: DevicePreview.locale(context), // Add the locale here
+        builder: DevicePreview.appBuilder,
+
         home: const SplashPage());
   }
 

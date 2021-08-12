@@ -57,7 +57,7 @@ abstract class BaseListState<T extends StatefulWidget,
         viewModel.refresh();
       },
       builder: (context, VM viewmodel, child) {
-        Logger.e("ProviderWidget", tag: "BaseListState");
+
         return LoadLayout(
           EasyRefresh(
             controller: viewModel.controller,

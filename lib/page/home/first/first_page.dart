@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_easylogger/flutter_logger.dart';
@@ -36,9 +37,24 @@ class FirstPagePageState extends State<FirstPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((callback) {
-      Logger.e(
-          " 状态栏---${MediaQuery.of(context).padding.top} ====  width = ${MediaQuery.of(context).padding.bottom}");
-      Logger.e(" appbar---$screenHeightPx");
+
+
+      /// 屏幕宽像素 分辨率
+      double screenWidthPx = window.physicalSize.width;
+
+      /// 屏幕高像素 分辨率
+      double screenHeightPx = window.physicalSize.height;
+
+      /// 比如我们写一个 SizeBox(width:screenWidth,height:screenHeight) 那就是铺满全屏
+      double screenWidth = screenWidthPx / window.devicePixelRatio;
+
+      /// MediaQuery.of(context).size.width 屏幕宽度
+      double screenHeight = screenHeightPx / window.devicePixelRatio;
+
+      Logger.e(" MediaQuery.width---${MediaQuery.of(context).size.width} ====  MediaQuery.height = ${MediaQuery.of(context).size.height}");
+      Logger.e(" screenWidthPx：===$screenWidthPx --  screenHeightPx ：$screenHeightPx");
+      Logger.e(" screenWidth：===$screenWidth --  screenHeight ：$screenHeight");
+
     });
 
     _controller = EasyRefreshController();

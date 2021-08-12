@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 100.w),
             SvgPicture.asset(
               "assets/img/login.svg",
-              height: screenHeight * 0.35,
+              height: screenWidth * 0.55,
             ),
             RoundedInputField(
               textEditingController: controllerName,

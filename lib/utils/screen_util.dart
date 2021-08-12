@@ -32,13 +32,13 @@ class SizeUtil {
     widthRatio = screenWidth / width;
     heightRatio = screenHeight / height;
 
-    Logger.e(
-        "physicalWidth $screenWidthPx ---- physicalHeight $screenHeightPx");
-    Logger.e(
-        "density $density  ------- screenWidth $screenWidth ---- screenHeight $screenHeight");
-    Logger.e(
-        "statusHeight $statusHeight ---- bottomBar ${window.padding.bottom / density}");
-    Logger.e("appbarHeight $kToolbarHeight");
+    // Logger.e(
+    //     "physicalWidth $screenWidthPx ---- physicalHeight $screenHeightPx");
+    // Logger.e(
+    //     "density $density  ------- screenWidth $screenWidth ---- screenHeight $screenHeight");
+    // Logger.e(
+    //     "statusHeight $statusHeight ---- bottomBar ${window.padding.bottom / density}");
+    // Logger.e("appbarHeight $kToolbarHeight");
   }
 
   static double setPx(double size) {

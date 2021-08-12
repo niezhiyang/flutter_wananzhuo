@@ -86,7 +86,7 @@ class _BannerState extends State<Banners> with SingleTickerProviderStateMixin {
     for (int i = 0; i < widget.tabs.length; i++) {
       children.add(GestureDetector(
         child:
-            ClipRRect(child:  image(widget.tabs[i], height: 170.w,),borderRadius: BorderRadius.circular(10.w),),
+            ClipRRect(child:  image(widget.tabs[i], height: 170.w,width: 330.w,fit: BoxFit.fill),borderRadius: BorderRadius.circular(10.w),),
 
 
         onTapUp: (detai) {
