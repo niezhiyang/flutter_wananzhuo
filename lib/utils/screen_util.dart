@@ -1,22 +1,11 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_easylogger/flutter_logger.dart';
+import 'package:flutter_autosize_screen/auto_size_util.dart';
 
-/// 屏幕宽像素 分辨率
-double screenWidthPx = window.physicalSize.width;
 
-/// 屏幕高像素 分辨率
-double screenHeightPx = window.physicalSize.height;
 
-/// 比如我们写一个 SizeBox(width:screenWidth,height:screenHeight) 那就是铺满全屏
-double screenWidth = screenWidthPx / window.devicePixelRatio;
 
-/// MediaQuery.of(context).size.width 屏幕宽度
-double screenHeight = screenHeightPx / window.devicePixelRatio;
 
-/// 状态栏高度
-double  statusHeight = window.padding.top / window.devicePixelRatio;
 
 
 
@@ -29,8 +18,8 @@ class SizeUtil {
     // 2.获取   android中 dp 转 px 就是通过 dp*density做的
     density = window.devicePixelRatio;
     // 5.计算 比例
-    widthRatio = screenWidth / width;
-    heightRatio = screenHeight / height;
+    widthRatio = AutoSizeUtil.getScreenSize().width / width;
+    heightRatio = AutoSizeUtil.getScreenSize().height / height;
 
     // Logger.e(
     //     "physicalWidth $screenWidthPx ---- physicalHeight $screenHeightPx");

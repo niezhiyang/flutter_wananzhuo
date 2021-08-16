@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_wananzhuo/base/baselist/base_state.dart';
 import 'package:flutter_wananzhuo/model/wx_off_mode.dart';
 import 'package:flutter_wananzhuo/page/home/wechat2/wx_listmodel.dart';
-import 'package:flutter_wananzhuo/page/repository/home_repository.dart';
-import 'package:flutter_wananzhuo/toast/toast.dart';
-import 'package:flutter_wananzhuo/utils/extension_util.dart';
+
+import '../../article_details.dart';
 
 ///
 class WxTabItemPage extends StatefulWidget {
@@ -46,7 +44,7 @@ class _WxTabItemPageState
 
     // // 找到收集的
     // if (Wankit.isLogin) {
-    //   List<int>? collectIds = context.watch<User>().collectIds;
+    //   List<int>? collectIds = contextatch<User>().collectIds;
     //   if (collectIds != null && collectIds.contains(homeItem.id)) {
     //     homeItem.collect = true;
     //   }
@@ -55,16 +53,16 @@ class _WxTabItemPageState
     // }
 
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 5.w, horizontal: 15.w),
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(14.w))), //设置圆角
+          borderRadius: BorderRadius.all(Radius.circular(14))), //设置圆角
       elevation: 2,
       child: InkWell(
         onTap: () {
-          // ArticleDetailPage.push(context, homeItem);
+          ArticleDetailPage.pushData(context, homeItem);
         },
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.w),
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: Row(
             children: [
               IconButton(
@@ -80,7 +78,7 @@ class _WxTabItemPageState
                     color: Theme.of(context).primaryColor,
                   )),
               SizedBox(
-                width: 10.w,
+                width: 10,
               ),
               Expanded(
                   child: Column(
@@ -101,7 +99,7 @@ class _WxTabItemPageState
                         ]),
                       ),
                       SizedBox(
-                        width: 10.w,
+                        width: 10,
                       ),
                       RichText(
                         text: TextSpan(children: [
@@ -118,7 +116,7 @@ class _WxTabItemPageState
                     ],
                   ),
                   SizedBox(
-                    height: 10.w,
+                    height: 10,
                   ),
                   Text(
                     homeItem.title ?? "",
@@ -128,7 +126,7 @@ class _WxTabItemPageState
                     style: const TextStyle(color: Colors.black, fontSize: 20),
                   ),
                   SizedBox(
-                    height: 10.w,
+                    height: 10,
                   ),
                   RichText(
                     text: TextSpan(children: [

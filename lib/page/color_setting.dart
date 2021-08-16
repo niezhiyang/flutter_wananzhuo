@@ -22,7 +22,7 @@ class _ColorSettingPageState extends State<ColorSettingPage> {
     return Scaffold(
         appBar: AppBar(title: Text("设置主题")),
         body: GridView.builder(
-          padding: EdgeInsets.only(top: 20.w, left: 10.w, right: 10.w),
+          padding: EdgeInsets.only(top: 20, left: 10, right: 10),
           shrinkWrap: true,
           itemCount: ThemeConstans.themeList.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -37,12 +37,12 @@ class _ColorSettingPageState extends State<ColorSettingPage> {
                 SharedPreferences.getInstance().then((value){value.setInt("color_index", index);});
               },
               child: Container(
-                width: 100.w,
-                height: 100.w,
+                width: 100,
+                height: 100,
                 color: ThemeConstans.themeList[index].primaryColor,
               ),
             ),shape:  RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(14.w))),);
+            borderRadius: BorderRadius.all(Radius.circular(14))),);
           },
         ));
   }

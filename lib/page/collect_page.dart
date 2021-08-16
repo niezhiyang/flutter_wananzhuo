@@ -162,16 +162,16 @@ class _CollectPageState extends State<CollectPage> {
     homeItem.collect = true;
 
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 5.w, horizontal: 15.w),
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       shape:  RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(14.w))), //设置圆角
+          borderRadius: BorderRadius.all(Radius.circular(14))), //设置圆角
       elevation: 2,
       child: InkWell(
         onTap: () {
           ArticleDetailPage.push(context, homeItem);
         },
         child: Padding(
-          padding:  EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.w),
+          padding:  EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: Row(
             children: [
               IconButton(
@@ -224,7 +224,7 @@ class _CollectPageState extends State<CollectPage> {
                         ]),
                       ),
                        SizedBox(
-                        width: 10.w,
+                        width: 10,
                       ),
                       RichText(
                         text: TextSpan(children: [
@@ -241,7 +241,7 @@ class _CollectPageState extends State<CollectPage> {
                     ],
                   ),
                    SizedBox(
-                    height: 10.w,
+                    height: 10,
                   ),
                   Text(
                     homeItem.title ?? "",
@@ -251,7 +251,7 @@ class _CollectPageState extends State<CollectPage> {
                     style: const TextStyle(color: Colors.black, fontSize: 20),
                   ),
                    SizedBox(
-                    height: 10.w,
+                    height: 10,
                   ),
                   RichText(
                     text: TextSpan(children: [

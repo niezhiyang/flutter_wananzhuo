@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage>
       type: BottomNavigationBarType.fixed,
 
       // BottomNavigationBarItem 中 icon 的大小
-      iconSize: 24.w,
+      iconSize: 24,
 
       // 当前所高亮的按钮index
       currentIndex: viewModel.currentIndex,

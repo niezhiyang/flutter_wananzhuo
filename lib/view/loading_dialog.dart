@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_autosize_screen/auto_size_util.dart';
 import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_wananzhuo/utils/screen_util.dart';
@@ -17,8 +18,8 @@ class LoadUtil {
     overlayEntry = OverlayEntry(builder: (BuildContext context) {
       // 在这里拦截失败
       return WillPopScope(child:  Container(
-        width: screenWidth,
-        height: screenHeight,
+        width: AutoSizeUtil.getScreenSize().width,
+        height: AutoSizeUtil.getScreenSize().height,
         color: const Color(0x20000000),
         child: Center(
           child: Container(

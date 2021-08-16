@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_autosize_screen/auto_size_util.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_wananzhuo/model/user_entity.dart';
 import 'package:flutter_wananzhuo/page/repository/user_repository.dart';
@@ -36,10 +37,10 @@ class _LoginPageState extends State<LoginPage> {
               "${context.watch<User>().username ?? "请登录"}",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 100.w),
+            SizedBox(height: 100),
             SvgPicture.asset(
               "assets/img/login.svg",
-              height: screenWidth * 0.55,
+              height: AutoSizeUtil.getScreenSize().width * 0.55,
             ),
             RoundedInputField(
               textEditingController: controllerName,
@@ -59,20 +60,20 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             Container(
-                margin:  EdgeInsets.only(top: 50.w, left: 50.w, right: 50.w, bottom: 0),
-                height: 50.w,
+                margin:  EdgeInsets.only(top: 50, left: 50, right: 50, bottom: 0),
+                height: 50,
                 width: MediaQuery.of(context).size.width,
                 child: MaterialButton(
                   elevation: 3,
                   shape:  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20.w))),
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
                   color: Theme.of(context).primaryColor,
                   minWidth: 60,
                   onPressed: login,
                   child:  Text("登录",
-                      style: TextStyle(color: Colors.white, fontSize: 20.w)),
+                      style: TextStyle(color: Colors.white, fontSize: 20)),
                 )),
-            SizedBox(height: screenHeightPx * 0.03),
+            SizedBox(height: AutoSizeUtil.getScreenSize().width * 0.03),
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_autosize_screen/auto_size_util.dart';
 import 'package:flutter_wananzhuo/wan_kit.dart';
 import 'package:provider/src/provider.dart';
 
@@ -10,6 +11,7 @@ import 'splash.dart';
 class WanApp extends StatelessWidget {
   WanApp({Key? key}) : super(key: key);
   RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
   // GlobalKey<>
   @override
   Widget build(BuildContext context) {
@@ -29,8 +31,9 @@ class WanApp extends StatelessWidget {
         //     return Center();
         //   },
         // },
-        locale: DevicePreview.locale(context), // Add the locale here
-        builder: DevicePreview.appBuilder,
+        builder: AutoSizeUtil.appBuilder,
+        locale: DevicePreview.locale(context),
+        // Add the locale here
 
         home: const SplashPage());
   }
@@ -49,9 +52,4 @@ class WanApp extends StatelessWidget {
           .themeList[context.watch<ThemeState>().colorIndex].bottomAppBarColor,
     );
   }
-
-
 }
-
-
-

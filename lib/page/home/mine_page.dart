@@ -27,7 +27,7 @@ class _MinePageState extends State<MinePage> {
             primary: true,
             forceElevated: false,
             automaticallyImplyLeading: true,
-            expandedHeight: 200.w,
+            expandedHeight: 200,
             snap: true,
             floating: true,
             pinned: true,
@@ -41,13 +41,13 @@ class _MinePageState extends State<MinePage> {
                         child: Image.asset(
                           "assets/img/avatar.webp",
                           fit: BoxFit.cover,
-                          width: 60.w,
-                          height: 60.w,
+                          width: 60,
+                          height: 60,
                         ),
                       ),
                       Text(
                         name ?? "请登录",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           color: Colors.white,
                         ),
@@ -68,7 +68,7 @@ class _MinePageState extends State<MinePage> {
         ];
       },
       body: ListView.separated(
-        padding:  EdgeInsets.all(16.w),
+        padding:  EdgeInsets.all(16),
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
           return _buildListItem(index);
@@ -88,13 +88,13 @@ class _MinePageState extends State<MinePage> {
   Widget _buildListItem(int index) {
     if (index == 4) {
       return Container(
-          margin:  EdgeInsets.only(top: 50.w, left: 10.w, right: 10.w, bottom: 0),
+          margin:  EdgeInsets.only(top: 50, left: 10, right: 10, bottom: 0),
           height: 50,
           width: MediaQuery.of(context).size.width,
           child: MaterialButton(
             elevation: 3,
             shape:  RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.w))),
+                borderRadius: BorderRadius.all(Radius.circular(20))),
             color: Theme.of(context).primaryColor,
             minWidth: 60,
             onPressed: _loginOut,

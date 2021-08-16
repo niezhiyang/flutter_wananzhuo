@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_easylogger/flutter_logger.dart';
 import 'package:flutter_wananzhuo/model/user_entity.dart';
 import 'package:flutter_wananzhuo/setting.dart';
+import 'package:flutter_wananzhuo/utils/screen_util.dart';
 import 'package:provider/src/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,6 +41,7 @@ class Wankit {
         child: Text("Flutter 走神了"),
       );
     };
+    SizeUtil.initialize();
   }
 
   /// 存用户

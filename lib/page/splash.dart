@@ -24,6 +24,7 @@ class _SplashPageState extends State<SplashPage> {
     WidgetsBinding.instance?.addPostFrameCallback((callback) {
       // 按道理来说 初始化完成所有的东西 才能进入主页面
       Wankit.init();
+
       Future.delayed(const Duration(seconds: 1)).then((value) =>
           Navigator.of(context).pushReplacementNamed(RouterInit.home));
     });

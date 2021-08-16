@@ -48,10 +48,10 @@ class FirstPagePageState extends State<FirstPage> {
       /// 比如我们写一个 SizeBox(width:screenWidth,height:screenHeight) 那就是铺满全屏
       double screenWidth = screenWidthPx / window.devicePixelRatio;
 
-      /// MediaQuery.of(context).size.width 屏幕宽度
+      /// MediaQuery.of(context).sizeidth 屏幕宽度
       double screenHeight = screenHeightPx / window.devicePixelRatio;
 
-      Logger.e(" MediaQuery.width---${MediaQuery.of(context).size.width} ====  MediaQuery.height = ${MediaQuery.of(context).size.height}");
+      Logger.e(" MediaQueryidth---${MediaQuery.of(context).size.width} ====  MediaQuery.height = ${MediaQuery.of(context).size.height}");
       Logger.e(" screenWidthPx：===$screenWidthPx --  screenHeightPx ：$screenHeightPx");
       Logger.e(" screenWidth：===$screenWidth --  screenHeight ：$screenHeight");
 
@@ -93,11 +93,11 @@ class FirstPagePageState extends State<FirstPage> {
   Widget _headerItem(FirstModle mode) {
     if (mode.banners.isEmpty) {
       return SizedBox(
-        height: 170.w,
+        height: 170,
       );
     } else {
       return Container(
-        margin: EdgeInsets.only(top: 15.w),
+        margin: EdgeInsets.only(top: 15),
         child: Banners(
           click: (int position) {
             var bannerData = mode.banners[position];
@@ -113,13 +113,7 @@ class FirstPagePageState extends State<FirstPage> {
     // return Image.network(mode.banners[0].imagePath!);
   }
 
-  Widget _headerItem1(FirstModle mode) {
-    return Container(
-      height: statusHeight,
-      width: screenWidth,
-      color: Colors.black,
-    );
-  }
+
 
   Widget _articleItem(HomeResponseDataDatas homeItem, int position) {
     String? chapter = homeItem.superChapterName;
@@ -129,7 +123,7 @@ class FirstPagePageState extends State<FirstPage> {
 
     // 这里处理登录之后 刷新即可
     // if (Wankit.isLogin) {
-    //   List<int>? collectIds = context.watch<User>().collectIds;
+    //   List<int>? collectIds = contextatch<User>().collectIds;
     //   if (collectIds != null && collectIds.contains(homeItem.id)) {
     //     homeItem.collect = true;
     //   }
@@ -142,7 +136,7 @@ class FirstPagePageState extends State<FirstPage> {
         ArticleDetailPage.push(context, homeItem);
       },
       child: Padding(
-        padding:  EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.w),
+        padding:  EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: Row(
           children: [
             IconButton(
@@ -196,7 +190,7 @@ class FirstPagePageState extends State<FirstPage> {
                   ],
                 ),
                  SizedBox(
-                  height: 10.w,
+                  height: 10,
                 ),
                 Text(
                   homeItem.title ?? "",
@@ -206,7 +200,7 @@ class FirstPagePageState extends State<FirstPage> {
                   style: const TextStyle(color: Colors.black, fontSize: 20),
                 ),
                  SizedBox(
-                  height: 10.w,
+                  height: 10,
                 ),
                 RichText(
                   text: TextSpan(children: [

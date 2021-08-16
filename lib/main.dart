@@ -1,8 +1,7 @@
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_autosize_screen/auto_size_util.dart';
+import 'package:flutter_autosize_screen/binding.dart';
 import 'package:flutter_wananzhuo/model/user_entity.dart';
-import 'package:flutter_wananzhuo/utils/extension_util.dart';
 import 'package:flutter_wananzhuo/utils/screen_util.dart';
 import 'package:provider/provider.dart';
 
@@ -10,25 +9,14 @@ import 'page/wan.dart';
 import 'setting.dart';
 
 void main() {
-  SizeUtil.initialize();
-
-  runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context){
-      return
-        MultiProvider(providers: [
-          // 更改主题颜色的
-          ChangeNotifierProvider(create: (_) => ThemeState()),
-          ChangeNotifierProvider(create: (_) => User()),
-        ], child: WanApp());
-      }, // Wrap your app
-    ),
-
-    //   MultiProvider(providers: [
-    //     // 更改主题颜色的
-    //     ChangeNotifierProvider(create: (_) => ThemeState()),
-    //     ChangeNotifierProvider(create: (_) => User()),
-    //   ], child: WanApp())
+  // 一个极低成本的 Flutter 屏幕适配方案，直接按照设计稿写就可以了
+  AutoSizeUtil.setStandard(360);
+  // 替换 runApp
+  runAutoApp(
+    MultiProvider(providers: [
+      // 更改主题颜色的
+      ChangeNotifierProvider(create: (_) => ThemeState()),
+      ChangeNotifierProvider(create: (_) => User()),
+    ], child: WanApp())
   );
 }
